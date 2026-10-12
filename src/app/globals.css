@@ -697,6 +697,97 @@ p {
   max-width: 56ch;
 }
 
+/* a catalogue of systems built, grouped by what each class taught */
+.builds {
+  margin-top: clamp(2.5rem, 5vw, 4rem);
+}
+
+.builds-head {
+  padding-bottom: clamp(1.4rem, 3vw, 2.2rem);
+  border-bottom: 2px solid var(--ink);
+}
+
+.builds-head h3 {
+  margin: 0 0 0.8rem;
+  font-size: clamp(1.6rem, 3.2vw, 2.6rem);
+  font-weight: 650;
+  font-stretch: 101%;
+  line-height: 0.97;
+  letter-spacing: -0.04em;
+}
+
+.builds-head p {
+  margin: 0;
+  max-width: 54ch;
+  font-family: var(--read);
+  font-size: clamp(1.02rem, 1.5vw, 1.2rem);
+  line-height: 1.55;
+  color: var(--ink-soft);
+}
+
+.build-group {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.6fr);
+  gap: clamp(1.2rem, 4vw, 3.5rem);
+  padding: clamp(1.8rem, 3.5vw, 2.8rem) 0;
+  border-bottom: 1px solid var(--rule);
+}
+
+.build-group-head h4 {
+  margin: 0 0 0.7rem;
+  font-size: clamp(1.1rem, 1.9vw, 1.45rem);
+  font-weight: 600;
+  font-stretch: 101%;
+  letter-spacing: -0.03em;
+  line-height: 1.05;
+}
+
+.build-group-head p {
+  margin: 0;
+  max-width: 40ch;
+  font-size: 0.92rem;
+  line-height: 1.6;
+  color: var(--ink-soft);
+}
+
+.build-list {
+  display: grid;
+  gap: 1.35rem;
+}
+
+.build h5 {
+  margin: 0 0 0.25rem;
+  font-size: 1.02rem;
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  line-height: 1.25;
+}
+
+.build h5 em {
+  margin-left: 0.5rem;
+  font-style: normal;
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  font-weight: 400;
+  color: var(--ochre);
+  vertical-align: 0.1em;
+}
+
+.build-stack {
+  margin: 0 0 0.4rem;
+  font-family: var(--mono);
+  font-size: 0.76rem;
+  color: var(--verdigris);
+}
+
+.build > p:last-child {
+  margin: 0;
+  max-width: 62ch;
+  font-size: 0.93rem;
+  line-height: 1.6;
+  color: var(--ink-soft);
+}
+
 /* papers: supporting credibility, smaller treatment */
 .papers {
   margin-top: clamp(2.5rem, 5vw, 4rem);
@@ -1225,7 +1316,8 @@ footer nav {
   }
 
   .case,
-  .oddjobs {
+  .oddjobs,
+  .build-group {
     grid-template-columns: 1fr;
   }
 

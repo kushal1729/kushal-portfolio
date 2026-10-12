@@ -72,6 +72,65 @@ const stages = [
   },
 ];
 
+/* Framed as the foundation the mining work stands on, not a résumé list:
+   knowing how a system is meant to be wired is what makes a forgotten one legible. */
+const builds = [
+  {
+    group: "Platforms, end to end",
+    lede: "Five applications taken from empty repository to working software, across Java, Node, Python and two major Angular versions. Knowing how a layered Spring service, an NgRx store or a role-based API is supposed to be wired is most of what makes an undocumented one readable.",
+    items: [
+      {
+        name: "Enterprise platform frontend",
+        note: "current",
+        stack: "Angular 21",
+        body: "Modular frontend architecture, feature development and performance work across large enterprise modules on a client-facing platform.",
+      },
+      {
+        name: "Developer experience platform",
+        stack: "Python, FastAPI, React, PostgreSQL",
+        body: "Internal engineering insights: repository activity tracking, anonymous pulse surveys, and role-based access across developer, manager, admin and stakeholder views.",
+      },
+      {
+        name: "Home services REST API",
+        stack: "Java 17, Spring Boot 3, PostgreSQL, JUnit 5",
+        body: "Layered role-based API with JWT auth, a full payment lifecycle and an expert onboarding and approval flow. Over 80% test coverage, documented with Swagger.",
+      },
+      {
+        name: "HouseMate booking SPA",
+        stack: "Angular 19, NgRx, RxJS, Karma",
+        body: "Customer and expert single-page app: five-slice NgRx state, a four-step booking wizard, card, UPI and net-banking payment flows, lazy-loaded routes, English and Hindi, and WCAG-AA accessibility.",
+      },
+      {
+        name: "IT help desk platform",
+        stack: "Node.js, Express, React, Jest",
+        body: "Ticket management with role-based dashboards and real-time status tracking.",
+      },
+    ],
+  },
+  {
+    group: "Data engineering",
+    lede: "Attribute lineage in a forgotten system is the same problem as a slowly-changing dimension — establish what a field means, where it came from, and what last changed it — only without anyone having designed it that way on purpose.",
+    items: [
+      {
+        name: "Medallion architecture pipelines",
+        stack: "Azure Databricks, PySpark, Delta Lake, ADF",
+        body: "Bronze, silver and gold layers with SCD type 1 and 2, change data capture and star-schema modelling, orchestrated through Data Factory and Databricks job clusters.",
+      },
+    ],
+  },
+  {
+    group: "Applied machine learning",
+    lede: "Reading dependable signal out of noisy real-world input, under constraints that are not negotiable — a model that has to run offline on a handheld device, or identify an animal from a muzzle print.",
+    items: [
+      {
+        name: "Biometric cattle identification",
+        stack: "Xception, Python",
+        body: "Deep-feature muzzle-pattern recognition at 93% accuracy. Third place at the TANUVAS Digital Veterinary Hackathon.",
+      },
+    ],
+  },
+];
+
 export default function Home() {
   return (
     <>
@@ -293,6 +352,39 @@ export default function Home() {
               </div>
             </aside>
 
+            <div className="builds">
+              <div className="builds-head">
+                <h3>Built before mined</h3>
+                <p>
+                  You cannot map a system you have never built. Everything
+                  below I took from an empty repository to working software,
+                  which is the only reason I can open somebody else&apos;s and
+                  tell what its author was trying to do.
+                </p>
+              </div>
+
+              {builds.map((group) => (
+                <section className="build-group" key={group.group}>
+                  <div className="build-group-head">
+                    <h4>{group.group}</h4>
+                    <p>{group.lede}</p>
+                  </div>
+                  <div className="build-list">
+                    {group.items.map((item) => (
+                      <article className="build" key={item.name}>
+                        <h5>
+                          {item.name}
+                          {item.note && <em>{item.note}</em>}
+                        </h5>
+                        <p className="build-stack">{item.stack}</p>
+                        <p>{item.body}</p>
+                      </article>
+                    ))}
+                  </div>
+                </section>
+              ))}
+            </div>
+
             <div className="papers">
               <a
                 className="paper-row"
@@ -429,10 +521,10 @@ export default function Home() {
                 <h2>Research-trained, production-minded</h2>
                 <p className="about-lede">
                   I am a software engineer at HashedIn by Deloitte, with a
-                  background in Computer and Communication Engineering and Data
-                  Science from Amrita Vishwa Vidyapeetham. Two IEEE papers, an
-                  Oracle data-science certification, and four Anthropic Claude
-                  credentials.
+                  background in Computer and Communication Engineering from
+                  Amrita Vishwa Vidyapeetham and a Data Science degree from IIT
+                  Madras. Two IEEE papers, an Oracle data-science
+                  certification, and four Anthropic Claude credentials.
                 </p>
                 <p className="about-lede">
                   What I actually care about is narrower than any of that: the
@@ -454,7 +546,15 @@ export default function Home() {
                   <span>2022&ndash;26</span>
                   <p>
                     <strong>Amrita Vishwa Vidyapeetham</strong>
-                    B.Tech, Computer and Communication Engineering
+                    B.Tech, Computer and Communication Engineering, with a
+                    minor in Data Science
+                  </p>
+                </div>
+                <div>
+                  <span>2022&ndash;26</span>
+                  <p>
+                    <strong>IIT Madras</strong>
+                    B.Sc, Data Science
                   </p>
                 </div>
                 <div>
@@ -462,6 +562,14 @@ export default function Home() {
                   <p>
                     <strong>IEEE INDISCON, INCIP</strong>
                     Two published papers; technical reviewer
+                  </p>
+                </div>
+                <div>
+                  <span>Field</span>
+                  <p>
+                    <strong>Live-in-Labs, Assam</strong>
+                    Participatory rural research on infrastructure, agriculture
+                    and livelihoods
                   </p>
                 </div>
               </div>
