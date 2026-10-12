@@ -17,7 +17,7 @@ import {
 const strata = [
   { yr: "2024", what: "Managed services, half-documented", known: "documented" },
   { yr: "2019", what: "Spring Boot API, no listed owner", known: "partly" },
-  { yr: "2015", what: "Struts and JSP, original author gone", known: "no owner" },
+  { yr: "2015", what: "JSF screens, original author gone", known: "no owner" },
   { yr: "2010", what: "SOAP integration layer", known: "unknown", dark: true },
   { yr: "2004", what: "Batch job, still runs payroll", known: "oral history", dark: true },
 ];
@@ -27,29 +27,48 @@ const stages = [
     name: "Survey",
     claim: "Inventory before opinions.",
     detail:
-      "Entry points, call graphs, data flows, the build graph, and twenty years of commit history, read end to end. Models read breadth no person has time for. I decide what the breadth means.",
+      "Every screen, every entry point, every outbound call. In a JSF application that means walking the view tree and the faces config, then following each screen down into its managed beans and service layer. Models read breadth no person has time for. I decide what the breadth means.",
+    artifacts: [
+      "Screen and entry-point inventory",
+      "External JAR dependency graph",
+      "Database and integration connection map",
+    ],
     out: "A map of what exists — and an honest list of what could not be reached.",
   },
   {
     name: "Excavate",
     claim: "Recover behaviour from the code, not the docs.",
     detail:
-      "Which branches ever fire. What the nightly batch actually writes. Which temporary flag has been load-bearing since 2011. Commit history and ticket archaeology as a second, independent source.",
+      "What a screen actually does, derived from the interface downward: the service calls behind a button, the DB2 reads and writes, the stored procedures, the green-screen transactions reached through bespoke adapters, and the process identifiers that let you follow a single request across all of it.",
+    artifacts: [
+      "Use cases derived screen by screen",
+      "End-to-end call paths into mainframe and stored procedures",
+      "Attribute-level data lineage",
+    ],
     out: "Behaviour described at the level of business rules, with evidence attached.",
   },
   {
     name: "Interpret",
     claim: "Write it down in the business's language.",
     detail:
-      "Capabilities, not classes. Specific enough that an engineer can act on it tomorrow, plain enough that the person funding the work can read it without a translator.",
+      "Capabilities, not classes. Which outside parties the system leans on — custodial, market-data and CRM providers — and the exact point each one is reached from. Specific enough that an engineer can act on it tomorrow, plain enough that the person funding the work can read it without a translator.",
+    artifacts: [
+      "Capability map",
+      "External integration register",
+      "Use-case catalogue",
+    ],
     out: "The document the team has been missing for a decade.",
   },
   {
     name: "Modernize",
-    claim: "Cut in the order the map says is safe.",
+    claim: "Cut in the order the evidence says is safe.",
     detail:
-      "Strangle at the edges. Pin behaviour under tests before touching it. Leave the dangerous core until the evidence says it is no longer dangerous. Sequence comes from the map, not from appetite.",
-    out: "A migration with a defensible reason for its order.",
+      "Before anything is switched off, establish who depends on it — not just inside the application, but anywhere else in the organization quietly calling the same procedure or reading the same table. Strangle at the edges, pin behaviour under tests first, and leave the dangerous core until the evidence says it is no longer dangerous.",
+    artifacts: [
+      "Decommissioning impact matrix, in-application and org-wide",
+      "Migration sequence with a defensible order",
+    ],
+    out: "A migration nobody has to guess their way through.",
   },
 ];
 
@@ -147,6 +166,11 @@ export default function Home() {
                   </div>
                   <div className="stage-body">
                     <p className="stage-detail">{stage.detail}</p>
+                    <ul className="artifacts">
+                      {stage.artifacts.map((artifact) => (
+                        <li key={artifact}>{artifact}</li>
+                      ))}
+                    </ul>
                     <p className="stage-out">
                       <b>Output</b> &mdash; {stage.out}
                     </p>
@@ -175,27 +199,43 @@ export default function Home() {
             <div className="cases">
               <article className="case case-lead">
                 <div>
-                  <p className="case-kind">Current &mdash; HashedIn by Deloitte</p>
-                  <h3>Legacy system archaeology</h3>
+                  <p className="case-kind">
+                    Current &mdash; financial services, via HashedIn by Deloitte
+                  </p>
+                  <h3>Mining a system nobody owns</h3>
                 </div>
                 <div>
                   <p className="case-body">
-                    Mapping and modernizing enterprise systems that have
-                    outlived their documentation and their original engineers.
-                    Static and dynamic analysis to establish what exists,
-                    retrieval over source and commit history to establish why,
-                    and an incremental migration sequence derived from the map
-                    rather than from appetite.
+                    A JSF application mined screen by screen: use cases derived
+                    from the interface downward, each one traced through its
+                    service layer into DB2, stored procedures, and green-screen
+                    mainframe transactions reached through bespoke adapters.
+                    Alongside it, the external JAR dependencies nobody has a
+                    record for, and the outside parties — custodial,
+                    market-data and CRM providers — that the system silently
+                    depends on.
+                  </p>
+                  <p className="case-body">
+                    The part that earns its keep is impact analysis. When
+                    somebody asks whether a component can be switched off, the
+                    answer has to account for every caller: inside the
+                    application, and anywhere else in the organization still
+                    reading the same table or calling the same procedure
+                    without remembering why.
                   </p>
                   <div className="tags">
-                    <span>call-graph analysis</span>
-                    <span>RAG over source history</span>
-                    <span>LLM pipelines</span>
-                    <span>incremental migration</span>
+                    <span>JSF screen mining</span>
+                    <span>DB2</span>
+                    <span>stored procedures</span>
+                    <span>mainframe call paths</span>
+                    <span>JAR dependency mapping</span>
+                    <span>attribute lineage</span>
+                    <span>impact analysis</span>
                   </div>
                   <p className="case-note">
-                    Client systems and figures stay with the client. The method
-                    is above, and the writing goes into more detail.
+                    Client systems, integration partners and figures stay with
+                    the client. The method is above, and the writing goes into
+                    more detail.
                   </p>
                 </div>
               </article>
@@ -223,6 +263,35 @@ export default function Home() {
                 </div>
               </article>
             </div>
+
+            <aside className="oddjobs">
+              <div>
+                <h3>The ones nobody else will touch</h3>
+              </div>
+              <div>
+                <p>
+                  Not all legacy lives in Java. A payroll process ran as an
+                  Excel ribbon tool, its real business rules buried in the VBA
+                  behind it, feeding vendor files through a chain of bot
+                  scripts that had long outlived their author.
+                </p>
+                <p>
+                  Reading that logic out — what each macro actually decided,
+                  which vendor file formats were load-bearing, what the bots
+                  did when a file arrived malformed — is the same work as
+                  mining a mainframe in a different costume. Business logic
+                  ends up wherever somebody could put it, and being willing to
+                  go there is most of the job.
+                </p>
+                <div className="tags">
+                  <span>VBA extraction</span>
+                  <span>Excel tooling</span>
+                  <span>bot script analysis</span>
+                  <span>vendor file formats</span>
+                  <span>logic mapping</span>
+                </div>
+              </div>
+            </aside>
 
             <div className="papers">
               <a

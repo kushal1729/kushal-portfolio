@@ -510,6 +510,34 @@ p {
   max-width: 56ch;
 }
 
+/* what each stage actually hands over; ochre marker = a finding, as elsewhere */
+.artifacts {
+  list-style: none;
+  margin: 0 0 1.1rem;
+  padding: 0;
+  max-width: 56ch;
+}
+
+.artifacts li {
+  position: relative;
+  padding-left: 1rem;
+  margin-bottom: 0.4rem;
+  font-size: 0.87rem;
+  line-height: 1.45;
+  color: rgba(219, 216, 206, 0.72);
+}
+
+.artifacts li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.52em;
+  width: 0.36rem;
+  height: 0.36rem;
+  background: var(--ochre-bright);
+  transform: rotate(45deg);
+}
+
 .stage-out {
   margin: 0;
   padding-top: 0.75rem;
@@ -638,6 +666,35 @@ p {
 .link svg {
   width: 0.85rem;
   height: 0.85rem;
+}
+
+/* the work that isn't Java: an aside to the main practice, not a peer of it */
+.oddjobs {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.25fr);
+  gap: clamp(1.2rem, 4vw, 4rem);
+  margin-top: clamp(1rem, 2vw, 1.5rem);
+  padding: clamp(1.5rem, 3vw, 2.5rem);
+  background: var(--paper-hi);
+  border-top: 2px solid var(--ochre);
+}
+
+.oddjobs h3 {
+  margin: 0;
+  font-size: clamp(1.4rem, 2.6vw, 2.2rem);
+  font-weight: 600;
+  font-stretch: 101%;
+  line-height: 0.99;
+  letter-spacing: -0.038em;
+  max-width: 16ch;
+}
+
+.oddjobs p {
+  margin: 0 0 1.1rem;
+  font-size: 1rem;
+  line-height: 1.62;
+  color: var(--ink-soft);
+  max-width: 56ch;
 }
 
 /* papers: supporting credibility, smaller treatment */
@@ -1167,7 +1224,8 @@ footer nav {
     align-items: start;
   }
 
-  .case {
+  .case,
+  .oddjobs {
     grid-template-columns: 1fr;
   }
 
