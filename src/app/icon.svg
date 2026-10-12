@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="10 -14.5 220 220" role="img" aria-label="Stylized Yellowstone ranch Y brand">
+  <defs>
+    <!-- userSpaceOnUse so the gradient maps to the artwork, not each subpath's bbox -->
+    <linearGradient id="gold" gradientUnits="userSpaceOnUse" x1="45" y1="0" x2="150" y2="190">
+      <stop offset="0" stop-color="#f7e08f"/>
+      <stop offset=".45" stop-color="#e0b24a"/>
+      <stop offset="1" stop-color="#c08a24"/>
+    </linearGradient>
+  </defs>
+  <rect x="10" y="-14.5" width="220" height="220" rx="45" fill="#141a18"/>
+  <path fill="url(#gold)" d="M23 20 C35 14 47 15 57 24 C69 34 81 55 96 78 L109 98 L109 174 C96 173 82 169 70 162 L65 174 C81 183 101 188 120 188 C139 188 159 183 175 174 L170 162 C158 169 144 173 131 174 L131 98 L144 78 C159 55 171 34 183 24 C193 15 205 14 217 20 L214 7 C200 3 188 6 178 14 C164 26 151 48 137 69 L120 94 L103 69 C89 48 76 26 62 14 C52 6 40 3 26 7 Z"/>
+</svg>
