@@ -77,13 +77,17 @@ const stages = [
 const builds = [
   {
     group: "Platforms, end to end",
-    lede: "Five applications taken from empty repository to working software, across Java, Node, Python and two major Angular versions. Knowing how a layered Spring service, an NgRx store or a role-based API is supposed to be wired is most of what makes an undocumented one readable.",
+    lede: "Six applications taken from empty repository to working software, across Java, Node, Python and two major Angular versions. Knowing how a layered Spring service, an NgRx store or a role-based API is supposed to be wired is most of what makes an undocumented one readable.",
     items: [
       {
         name: "Enterprise platform frontend",
-        note: "current",
         stack: "Angular 21",
-        body: "Modular frontend architecture, feature development and performance work across large enterprise modules on a client-facing platform.",
+        body: "Modular frontend architecture, feature development and performance work across large enterprise modules.",
+      },
+      {
+        name: "Product-to-code multi-agent system",
+        stack: "Python, FastAPI, LangGraph, pgvector, Langfuse",
+        body: "Archaeology run in reverse: requirements in; epics, stories, specifications and working code out, with pause-and-resume checkpoints, live progress, generated diagrams and full LLM observability.",
       },
       {
         name: "Developer experience platform",
@@ -249,14 +253,14 @@ export default function Home() {
             <div className="head">
               <h2>Work</h2>
               <p className="head-note">
-                The archaeology is current client work, so it is described by
-                method rather than by name. Everything below it is the ground
-                that method stands on.
+                Two client engagements through HashedIn by Deloitte, described
+                by method rather than by name. Everything below them is the
+                ground that method stands on.
               </p>
             </div>
 
             <div className="cases">
-              <article className="case case-lead">
+              <article className="case case-client">
                 <div>
                   <p className="case-kind">
                     Current &mdash; financial services, via HashedIn by Deloitte
@@ -299,26 +303,40 @@ export default function Home() {
                 </div>
               </article>
 
-              <article className="case">
+              <article className="case case-client">
                 <div>
-                  <p className="case-kind">Built it &mdash; applied AI systems</p>
-                  <h3>Product-to-code multi-agent system</h3>
+                  <p className="case-kind">
+                    Completed June 2026 &mdash; client engagement via HashedIn by
+                    Deloitte
+                  </p>
+                  <h3>Where an agent pays for itself</h3>
                 </div>
                 <div>
                   <p className="case-body">
-                    Archaeology run in reverse: requirements in, epics, stories,
-                    specifications and working code out, with pause and resume
-                    checkpoints, live progress, generated diagrams and full LLM
-                    observability. Building the forward direction is where I
-                    learned most of what I know about reading the backward one.
+                    The same survey discipline, pointed at a business instead of
+                    a codebase: walking the client&apos;s business model end to
+                    end and marking every point where an agent could take on or
+                    assist the work.
+                  </p>
+                  <p className="case-body">
+                    The pass that mattered was the second one: a profitability
+                    case for each candidate, weighing what an integration would
+                    cost to build and run against the work it would actually
+                    remove. There are plenty of places an agent <em>could</em>{" "}
+                    go and far fewer where it <em>should</em>, and the
+                    engagement&apos;s output was the shortlist that survived
+                    that test.
                   </p>
                   <div className="tags">
-                    <span>Python</span>
-                    <span>FastAPI</span>
-                    <span>LangGraph</span>
-                    <span>pgvector</span>
-                    <span>Langfuse</span>
+                    <span>business model analysis</span>
+                    <span>process mapping</span>
+                    <span>agentic opportunity assessment</span>
+                    <span>cost&ndash;benefit modelling</span>
                   </div>
+                  <p className="case-note">
+                    The client, its figures and the shortlist stay with the
+                    client.
+                  </p>
                 </div>
               </article>
             </div>
@@ -372,10 +390,7 @@ export default function Home() {
                   <div className="build-list">
                     {group.items.map((item) => (
                       <article className="build" key={item.name}>
-                        <h5>
-                          {item.name}
-                          {item.note && <em>{item.note}</em>}
-                        </h5>
+                        <h5>{item.name}</h5>
                         <p className="build-stack">{item.stack}</p>
                         <p>{item.body}</p>
                       </article>

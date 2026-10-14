@@ -584,26 +584,27 @@ p {
   border-left: 3px solid var(--verdigris);
 }
 
-.case-lead {
+/* client engagements: the only work on the site that faces a client */
+.case-client {
   border-left-color: var(--ochre-bright);
   background: var(--ink);
   color: var(--paper);
 }
 
-.case-lead .case-kind {
+.case-client .case-kind {
   color: var(--ochre-bright);
 }
 
-.case-lead .case-body {
+.case-client .case-body {
   color: rgba(219, 216, 206, 0.85);
 }
 
-.case-lead .tags span {
+.case-client .tags span {
   border-color: var(--rule-dark);
   color: rgba(219, 216, 206, 0.8);
 }
 
-.case-lead .case-note {
+.case-client .case-note {
   color: rgba(219, 216, 206, 0.62);
 }
 
@@ -761,16 +762,6 @@ p {
   font-weight: 600;
   letter-spacing: -0.015em;
   line-height: 1.25;
-}
-
-.build h5 em {
-  margin-left: 0.5rem;
-  font-style: normal;
-  font-family: var(--mono);
-  font-size: 0.68rem;
-  font-weight: 400;
-  color: var(--ochre);
-  vertical-align: 0.1em;
 }
 
 .build-stack {
