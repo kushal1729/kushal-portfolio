@@ -1,8 +1,8 @@
 # kushalyarlagadda.in
 
-Personal site for Kushal Yarlagadda — software engineer working on legacy codebase archaeology: using AI to map, document and modernize enterprise systems that have outlived their documentation and their original engineers.
+Personal site for Kushal Yarlagadda — software engineer at HashedIn by Deloitte building AI systems that read, reason about and write software.
 
-Built with Next.js 16 (App Router, Turbopack), TypeScript, and hand-written CSS.
+Built with Next.js 16 (App Router, Turbopack), TypeScript, and hand-written CSS. Only Tailwind's reset (preflight) is imported; no utility classes are generated, so none can collide with the site's own class names. No animation library: motion is CSS, scroll-driven animations and the View Transitions API.
 
 ## Local development
 
@@ -22,32 +22,42 @@ npm run build
 
 | Path | What lives there |
 | --- | --- |
-| `src/app/page.tsx` | The homepage — hero, the problem, method, work, writing, credentials, about, contact |
-| `src/app/globals.css` | The whole design system. No CSS framework classes in markup |
-| `src/lib/site.ts` | Name, role, positioning line, contact links. Change these in one place |
+| `src/app/page.tsx` | The homepage: hero, selected work, builds, experience, research, writing, contact |
+| `src/app/globals.css` | The whole design system: tokens, components, motion, print. No CSS framework classes in markup |
+| `src/lib/site.ts` | Name, role, pitch, contact links, nav. Change these in one place |
+| `src/content/profile.ts` | Case studies, builds, experience, papers and recognition |
 | `src/content/writing.tsx` | Posts, authored as typed TSX modules |
-| `src/components/chrome.tsx` | Shared header and footer |
+| `src/components/trace-demo.tsx` | The hero's Read / Reason / Write demo |
+| `src/components/case-figures.tsx` | The diagram beside each case study |
+| `src/components/build-grid.tsx` | Filterable builds grid |
+| `src/components/site-header.tsx` | Header, mobile menu, command palette (⌘K / Ctrl K) and toasts |
 | `src/app/writing/` | Post index, post pages, per-post OG images, RSS feed |
+| `src/lib/outline.ts` | Gives each post's `<h2>`s ids and builds its table of contents |
+| `src/components/post-outline.tsx` | The sticky "On this page" contents beside a post |
+| `src/components/back-link.tsx` | Back links that return you to your scroll position when you came from that page |
+| `src/components/follow-button.tsx` | The Follow panel: explains RSS, one-click Feedly and Inoreader, copyable feed address |
+| `src/app/not-found.tsx` | The 404 page |
 | `src/app/opengraph-image.tsx` | Social preview card, generated at build time |
 
 ## Adding a post
 
 Append an entry to the `posts` array in `src/content/writing.tsx`. Each post needs a `slug`, `title`, `standfirst`, `date` (`YYYY-MM-DD`), `readingTime`, and a `body` of JSX.
 
-Everything else follows automatically: the route, the homepage listing, the sitemap entry, the RSS item, and a generated OG card.
+Everything else follows automatically: the route, the homepage listing, the sitemap entry, the RSS item, a generated OG card, the earlier/later links, and an "On this page" contents list built from the post's `<h2>` headings (shown when there are three or more).
 
 ## Design notes
 
-The visual language is "Core Sample", built around archaeological survey drawings rather than dev-portfolio convention. Colour is semantic, not decorative:
+The visual language is "Trace", borrowed from execution traces: following one request through a system. One cobalt accent marks only the thing being followed (the active state, the path, the finding); everything else is ink.
 
-- **verdigris** `#1b5f4d` — the existing system: patina, age, what is already there
-- **ochre** `#7a5508` — annotation: a marking made on it, something found
+- Light: `#f1f2f4` ground, `#14161b` ink, `#2a3fe8` accent. Dark: deep ink blue `#0c1020`, accent `#8e9cff`. The site follows the system theme, with a toggle that remembers an explicit choice
+- Type is Mona Sans throughout. Its width axis gives small facts (dates, stacks, venues) a condensed voice; Martian Mono appears only in literal code
+- Motion: the name sets letter by letter on load and then answers the cursor along its width and weight axes; the hero demo runs Read, Reason and Write; scroll-driven reveals are shaped to what they reveal (headings sharpen, diagrams assemble, the timeline draws itself); the nav underline and filter pill glide; cards catch a spotlight; a back-to-top ring tracks reading progress. The static state is always complete, so `prefers-reduced-motion` removes the movement and loses nothing else, and browsers without scroll-driven animations simply show the content
 
-Type is Archivo for structure, Newsreader for reading passages, and JetBrains Mono for literal code only. All muted tones are tuned to pass WCAG AA (4.5:1) on the limestone ground — re-check contrast before introducing a new one.
+Every text colour passes WCAG AA (4.5:1) on every surface in both themes — re-check before introducing a new one. Printing the homepage produces a clean CV without the site chrome, demo or writing list.
 
 ## Content guardrails
 
-The legacy-systems work is employer client work. Site copy describes **method and capability only** — never client names, systems, or figures, and never anything implying freelance availability. The strata drawing in the hero is captioned as illustrative for this reason.
+The legacy-systems work is employer client work. Site copy describes **method and technology only** — never client names, sectors, partners, platform names or figures, and never anything implying freelance availability. The hero demo's code, candidates and requirement are invented, and each caption is marked "Example only" for this reason.
 
 Do not commit API keys, credentials, private client material, or unlicensed assets.
 

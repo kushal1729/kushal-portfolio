@@ -24,6 +24,32 @@ export const ArrowRight = (props: IconProps) => (
   </svg>
 );
 
+export const Rss = (props: IconProps) => (
+  <svg {...base} {...props}>
+    <path d="M5 11a8 8 0 0 1 8 8M5 5a14 14 0 0 1 14 14" />
+    <circle cx="6" cy="18" r="1.3" fill="currentColor" stroke="none" />
+  </svg>
+);
+
+export const ArrowLeft = (props: IconProps) => (
+  <svg {...base} {...props}>
+    <path d="M20 12H4m7 7-7-7 7-7" />
+  </svg>
+);
+
+export const Share = (props: IconProps) => (
+  <svg {...base} {...props}>
+    <path d="M12 15V3m-4.5 4.5L12 3l4.5 4.5" />
+    <path d="M8 11H6a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-6a2 2 0 0 0-2-2h-2" />
+  </svg>
+);
+
+export const ArrowUp = (props: IconProps) => (
+  <svg {...base} {...props}>
+    <path d="M12 20V4m-7 7 7-7 7 7" />
+  </svg>
+);
+
 export const ArrowDown = (props: IconProps) => (
   <svg {...base} {...props}>
     <path d="M12 4v16m7-7-7 7-7-7" />
@@ -54,5 +80,68 @@ export const Document = (props: IconProps) => (
   <svg {...base} {...props}>
     <path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z" />
     <path d="M14 3v5h5M9 13h6M9 17h4" />
+  </svg>
+);
+
+export const Copy = (props: IconProps) => (
+  <svg {...base} {...props}>
+    <rect x="8" y="8" width="12" height="12" rx="2" />
+    <path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2" />
+  </svg>
+);
+
+export const Check = (props: IconProps) => (
+  <svg {...base} {...props}>
+    <path d="m5 12.5 4.5 4.5L19 7.5" />
+  </svg>
+);
+
+export const Sun = (props: IconProps) => (
+  <svg {...base} {...props}>
+    <circle cx="12" cy="12" r="4" />
+    <path d="M12 2.5v2M12 19.5v2M4.6 4.6 6 6M18 18l1.4 1.4M2.5 12h2M19.5 12h2M4.6 19.4 6 18M18 6l1.4-1.4" />
+  </svg>
+);
+
+export const Moon = (props: IconProps) => (
+  <svg {...base} {...props}>
+    <path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z" />
+  </svg>
+);
+
+export const Menu = (props: IconProps) => (
+  <svg {...base} {...props}>
+    <path d="M4 8h16M4 16h16" />
+  </svg>
+);
+
+export const Close = (props: IconProps) => (
+  <svg {...base} {...props}>
+    <path d="M6 6l12 12M18 6 6 18" />
+  </svg>
+);
+
+export const Search = (props: IconProps) => (
+  <svg {...base} {...props}>
+    <circle cx="11" cy="11" r="6.5" />
+    <path d="m16 16 4 4" />
+  </svg>
+);
+
+export const Pause = (props: IconProps) => (
+  <svg {...base} {...props}>
+    <path d="M9 6v12M15 6v12" />
+  </svg>
+);
+
+export const Play = (props: IconProps) => (
+  <svg {...base} {...props}>
+    <path d="M8 5.5v13l10.5-6.5z" />
+  </svg>
+);
+
+export const ChevronDown = (props: IconProps) => (
+  <svg {...base} {...props}>
+    <path d="m6 9 6 6 6-6" />
   </svg>
 );

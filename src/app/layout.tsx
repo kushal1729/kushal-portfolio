@@ -1,49 +1,48 @@
-import type { Metadata } from "next";
-import { Archivo, Newsreader, JetBrains_Mono } from "next/font/google";
+import type { Metadata, Viewport } from "next";
+import { Mona_Sans, Martian_Mono } from "next/font/google";
 import { site } from "@/lib/site";
 import "./globals.css";
 
-const archivo = Archivo({
+/* One variable family does all the talking; its width axis gives data its
+   own voice without reaching for a monospace. */
+const mona = Mona_Sans({
   subsets: ["latin"],
   axes: ["wdth"],
-  variable: "--font-archivo",
+  variable: "--font-mona",
   display: "swap",
 });
 
-const newsreader = Newsreader({
+/* Literal code only. */
+const mono = Martian_Mono({
   subsets: ["latin"],
-  style: ["normal", "italic"],
-  variable: "--font-newsreader",
-  display: "swap",
-});
-
-const mono = JetBrains_Mono({
-  subsets: ["latin"],
+  axes: ["wdth"],
   variable: "--font-mono",
   display: "swap",
 });
 
+const title = "Kushal Yarlagadda — AI systems that read and write software";
+
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   title: {
-    default: "Kushal Yarlagadda — Legacy codebase archaeology & modernization",
+    default: title,
     template: "%s — Kushal Yarlagadda",
   },
   description: site.description,
   keywords: [
-    "legacy codebase",
-    "legacy system modernization",
-    "software archaeology",
-    "codebase documentation",
-    "legacy code analysis",
-    "AI code analysis",
-    "undocumented systems",
-    "JSF application analysis",
-    "mainframe integration mapping",
-    "decommissioning impact analysis",
-    "data lineage",
-    "VBA extraction",
     "Kushal Yarlagadda",
+    "software engineer",
+    "AI engineer",
+    "multi-agent systems",
+    "LangGraph",
+    "agentic workflows",
+    "legacy code analysis",
+    "legacy system modernization",
+    "codebase documentation",
+    "full-stack engineer",
+    "Angular",
+    "FastAPI",
+    "Spring Boot",
   ],
   authors: [{ name: site.name, url: site.url }],
   creator: site.name,
@@ -52,7 +51,7 @@ export const metadata: Metadata = {
     types: { "application/rss+xml": `${site.url}/writing/rss.xml` },
   },
   openGraph: {
-    title: "Kushal Yarlagadda — Legacy codebase archaeology & modernization",
+    title,
     description: site.positioning,
     url: site.url,
     siteName: site.name,
@@ -61,7 +60,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Kushal Yarlagadda — Legacy codebase archaeology & modernization",
+    title,
     description: site.positioning,
   },
   robots: {
@@ -71,8 +70,19 @@ export const metadata: Metadata = {
   },
 };
 
-/* Structured data: how search and answer engines learn to associate
-   the person with the specialism, not just the job title. */
+export const viewport: Viewport = {
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#f1f2f4" },
+    { media: "(prefers-color-scheme: dark)", color: "#0c1020" },
+  ],
+};
+
+/* Runs before first paint. Only an explicit choice is stored; without one,
+   the CSS follows the system setting live. */
+const themeScript = `try{var t=localStorage.getItem("theme");if(t==="light"||t==="dark")document.documentElement.dataset.theme=t}catch(e){}`;
+
+/* Structured data: how search and answer engines learn what the person does,
+   not just the job title. */
 const personSchema = {
   "@context": "https://schema.org",
   "@type": "Person",
@@ -82,24 +92,24 @@ const personSchema = {
   jobTitle: "Software Engineer",
   description: site.description,
   knowsAbout: [
-    "Legacy system modernization",
-    "Static and dynamic code analysis",
-    "Call graph and dependency analysis",
-    "JSF application analysis",
-    "DB2 and stored procedure tracing",
-    "Mainframe integration mapping",
-    "Attribute-level data lineage",
-    "Decommissioning impact analysis",
-    "VBA and Excel tooling extraction",
-    "Retrieval-augmented generation",
     "Multi-agent LLM systems",
+    "LangGraph",
+    "LLM observability",
+    "Legacy system modernization",
+    "Static code analysis",
+    "Data lineage",
+    "Full-stack web development",
+    "Angular",
+    "FastAPI",
+    "Spring Boot",
+    "Data engineering",
     "Computer vision",
   ],
-  worksFor: { "@type": "Organization", name: "HashedIn by Deloitte" },
-  alumniOf: {
-    "@type": "CollegeOrUniversity",
-    name: "Amrita Vishwa Vidyapeetham",
-  },
+  worksFor: { "@type": "Organization", name: site.employer },
+  alumniOf: [
+    { "@type": "CollegeOrUniversity", name: "Amrita Vishwa Vidyapeetham" },
+    { "@type": "CollegeOrUniversity", name: "IIT Madras" },
+  ],
   sameAs: [site.github, site.linkedin],
 };
 
@@ -109,8 +119,15 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${archivo.variable} ${newsreader.variable} ${mono.variable}`}
+      className={`${mona.variable} ${mono.variable}`}
+      /* smooth for in-page jumps, but Next switches it off for route
+         changes, so a new page always opens at its top */
+      data-scroll-behavior="smooth"
+      suppressHydrationWarning
     >
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: themeScript }} />
+      </head>
       <body>
         <script
           type="application/ld+json"
