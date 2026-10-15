@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { ViewTransition } from "react";
 import { SiteFooter, SiteHeader } from "@/components/chrome";
 import { posts, getPost, formatDate } from "@/content/writing";
 import { site } from "@/lib/site";
@@ -53,33 +54,36 @@ export default async function PostPage({ params }: Params) {
   };
 
   return (
-    <div className="shell">
+    <>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
       />
+      <a className="skip-link" href="#main">
+        Skip to content
+      </a>
       <SiteHeader />
 
-      <main className="article band" id="main">
-        <article>
-          <div className="article-head">
-            <p className="article-dateline">
-              <time dateTime={post.date}>{formatDate(post.date)}</time>
-              <span>{post.readingTime} read</span>
-            </p>
+      <main className="wrap" id="main">
+        <article className="article">
+          <p className="article-meta">
+            <time dateTime={post.date}>{formatDate(post.date)}</time>
+            <span>{post.readingTime} read</span>
+          </p>
+          <ViewTransition name={`post-title-${post.slug}`} share="morph" default="none">
             <h1>{post.title}</h1>
-          </div>
+          </ViewTransition>
           <p className="article-standfirst">{post.standfirst}</p>
           <div className="prose">{post.body}</div>
-        </article>
 
-        <div className="article-foot">
-          <Link href="/writing">All writing</Link>
-          <a href={`mailto:${site.email}`}>Reply by email</a>
-        </div>
+          <div className="article-foot">
+            <Link href="/writing">All writing</Link>
+            <a href={`mailto:${site.email}`}>Reply by email</a>
+          </div>
+        </article>
       </main>
 
       <SiteFooter />
-    </div>
+    </>
   );
 }

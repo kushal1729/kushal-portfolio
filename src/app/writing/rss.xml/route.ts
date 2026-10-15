@@ -2,7 +2,7 @@ import { posts } from "@/content/writing";
 import { site } from "@/lib/site";
 
 const FEED_DESCRIPTION =
-  "Notes on legacy codebase archaeology: what to trust about an old system, in what order, and where a language model earns its place.";
+  "Notes on reading systems nobody remembers: what to trust about an old system, in what order, and where a language model earns its place.";
 
 const escape = (value: string) =>
   value
