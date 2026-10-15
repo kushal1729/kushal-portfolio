@@ -1782,13 +1782,15 @@ html:not(.theme-switching) .site-header {
     z-index: 1;
     padding: 1px;
     background: radial-gradient(280px circle at var(--mx, 50%) var(--my, 50%), var(--accent), transparent 70%);
+    /* keep only the 1px ring: the padding box minus the content box */
     -webkit-mask:
       linear-gradient(#000 0 0) content-box,
       linear-gradient(#000 0 0);
     -webkit-mask-composite: xor;
     mask:
-      linear-gradient(#000 0 0) content-box exclude,
+      linear-gradient(#000 0 0) content-box,
       linear-gradient(#000 0 0);
+    mask-composite: exclude;
   }
 
   .spot:hover::before,
