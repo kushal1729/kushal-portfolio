@@ -28,12 +28,17 @@ export function useSlidingIndicator(
       indicator.style.setProperty("--h", `${target.offsetHeight}px`);
     };
 
-    place();
-    /* First placement lands without travelling in from the corner. */
-    const frame = requestAnimationFrame(() => {
-      container.setAttribute("data-indicator", "ready");
+    /* A ResizeObserver reports right after the browser's own layout, so
+       measuring there never forces an extra reflow. It also fires once on
+       observe, which does the first placement; the transition is switched
+       on a frame later, so that placement lands without travelling. */
+    let frame = 0;
+    const observer = new ResizeObserver(() => {
+      place();
+      if (!container.hasAttribute("data-indicator")) {
+        frame = requestAnimationFrame(() => container.setAttribute("data-indicator", "ready"));
+      }
     });
-    const observer = new ResizeObserver(place);
     observer.observe(container);
     return () => {
       cancelAnimationFrame(frame);

@@ -80,6 +80,7 @@ export function SiteHeader({
   const primary = useRef<HTMLElement>(null);
   const underline = useRef<HTMLSpanElement>(null);
   const isMac = useIsMac();
+  const shortcut = isMac === false ? "Ctrl K" : "⌘K";
   const pathname = usePathname();
   usePathTracker();
 
@@ -141,14 +142,16 @@ export function SiteHeader({
               type="button"
               className="palette-trigger"
               onClick={openPalette}
-              aria-label="Open command menu"
+              /* the spoken name starts with the visible words (WCAG 2.5.3),
+                 and still names the button when only the icon shows */
+              aria-label={`Search ${shortcut}`}
               aria-keyshortcuts="Meta+K Control+K"
             >
               <Search />
               <span className="palette-label" aria-hidden="true">
                 Search
               </span>
-              <kbd>{isMac === false ? "Ctrl K" : "⌘K"}</kbd>
+              <kbd aria-hidden="true">{shortcut}</kbd>
             </button>
             <ThemeButton />
             <a className="btn btn-small resume-link" href={site.resume} target="_blank" rel="noreferrer">

@@ -2781,7 +2781,7 @@ html:not(.theme-switching) .site-header {
   /* load: name, then pitch, role and actions, then the demo */
   /* backwards, not both: once set, the letters belong to the cursor */
   .name-char {
-    animation: set-type 1100ms var(--ease-out) calc(var(--c) * 28ms) backwards;
+    animation: set-type 700ms var(--ease-out) calc(var(--c) * 22ms) backwards;
     transition:
       font-stretch 500ms var(--ease-out),
       font-weight 500ms var(--ease-out),
@@ -2804,39 +2804,40 @@ html:not(.theme-switching) .site-header {
     }
   }
 
+  /* transform and opacity only: animating the font's width axis on load
+     re-laid out the text every frame, which cost seconds on phones */
   @keyframes set-type {
     from {
       opacity: 0;
-      font-stretch: 125%;
-      font-weight: 300;
-      translate: 0 0.12em;
+      translate: 0 0.35em;
     }
   }
 
   .hero-copy > *,
   .hero .demo {
-    animation: rise 900ms var(--ease-out) both;
+    animation: rise 700ms var(--ease-out) both;
   }
 
   .hero-copy > :nth-child(1) {
-    animation-delay: 450ms;
+    animation-delay: 120ms;
   }
 
   .hero-copy > :nth-child(2) {
-    animation-delay: 540ms;
+    animation-delay: 180ms;
   }
 
   .hero-copy > :nth-child(3) {
-    animation-delay: 630ms;
+    animation-delay: 240ms;
   }
 
   .hero .demo {
-    animation-delay: 720ms;
+    animation-delay: 300ms;
   }
 
+  /* movement without a fade: the pitch is the page's main content, and it
+     has to be visible in the very first frame to count as painted */
   @keyframes rise {
     from {
-      opacity: 0;
       translate: 0 14px;
     }
   }

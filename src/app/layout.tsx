@@ -12,12 +12,14 @@ const mona = Mona_Sans({
   display: "swap",
 });
 
-/* Literal code only. */
+/* Literal code only. Not preloaded: it never sets the page's main text, so
+   on a slow connection it should not compete with Mona Sans and the CSS. */
 const mono = Martian_Mono({
   subsets: ["latin"],
   axes: ["wdth"],
   variable: "--font-mono",
   display: "swap",
+  preload: false,
 });
 
 const title = "Kushal Yarlagadda — AI systems that read and write software";
