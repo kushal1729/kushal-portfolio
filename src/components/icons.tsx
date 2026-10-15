@@ -24,6 +24,26 @@ export const ArrowRight = (props: IconProps) => (
   </svg>
 );
 
+export const Rss = (props: IconProps) => (
+  <svg {...base} {...props}>
+    <path d="M5 11a8 8 0 0 1 8 8M5 5a14 14 0 0 1 14 14" />
+    <circle cx="6" cy="18" r="1.3" fill="currentColor" stroke="none" />
+  </svg>
+);
+
+export const ArrowLeft = (props: IconProps) => (
+  <svg {...base} {...props}>
+    <path d="M20 12H4m7 7-7-7 7-7" />
+  </svg>
+);
+
+export const Share = (props: IconProps) => (
+  <svg {...base} {...props}>
+    <path d="M12 15V3m-4.5 4.5L12 3l4.5 4.5" />
+    <path d="M8 11H6a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-6a2 2 0 0 0-2-2h-2" />
+  </svg>
+);
+
 export const ArrowUp = (props: IconProps) => (
   <svg {...base} {...props}>
     <path d="M12 20V4m-7 7 7-7 7 7" />

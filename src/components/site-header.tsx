@@ -1,8 +1,10 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState, useSyncExternalStore } from "react";
 import { nav, site } from "@/lib/site";
+import { usePathTracker } from "./back-link";
 import { CommandPalette, openPalette, type PostLink } from "./command-palette";
 import { useSlidingIndicator } from "./sliding-indicator";
 import { Toaster } from "./toast";
@@ -51,12 +53,16 @@ function SectionLink({
   id: string;
   children: React.ReactNode;
 } & React.AnchorHTMLAttributes<HTMLAnchorElement>) {
-  return home ? (
-    <a href={`#${id}`} {...rest}>
-      {children}
-    </a>
-  ) : (
-    <Link href={`/#${id}`} {...rest}>
+  if (home) {
+    return (
+      <a href={`#${id}`} {...rest}>
+        {children}
+      </a>
+    );
+  }
+  /* away from the homepage, Writing means the writing pages themselves */
+  return (
+    <Link href={id === "writing" ? "/writing" : `/#${id}`} {...rest}>
       {children}
     </Link>
   );
@@ -74,7 +80,13 @@ export function SiteHeader({
   const primary = useRef<HTMLElement>(null);
   const underline = useRef<HTMLSpanElement>(null);
   const isMac = useIsMac();
-  useSlidingIndicator(primary, underline, "a[aria-current]", active);
+  const pathname = usePathname();
+  usePathTracker();
+
+  /* On the homepage, the section in view; on the writing pages, Writing. */
+  const current = home ? active : pathname.startsWith("/writing") ? "writing" : null;
+  const currentKind = home ? "location" : pathname === "/writing" ? "page" : "true";
+  useSlidingIndicator(primary, underline, "a[aria-current]", current);
 
   /* Highlight whichever section crosses the middle of the viewport. */
   useEffect(() => {
@@ -117,7 +129,7 @@ export function SiteHeader({
                 key={item.id}
                 home={home}
                 id={item.id}
-                aria-current={active === item.id ? "location" : undefined}
+                aria-current={current === item.id ? currentKind : undefined}
               >
                 {item.label}
               </SectionLink>
@@ -172,8 +184,19 @@ export function SiteHeader({
             </button>
           </div>
           <nav aria-label="Menu">
+            {!home && (
+              <Link href="/" onClick={closeMenu}>
+                Home
+              </Link>
+            )}
             {[...nav, { id: "contact", label: "Contact" }].map((item) => (
-              <SectionLink key={item.id} home={home} id={item.id} onClick={closeMenu}>
+              <SectionLink
+                key={item.id}
+                home={home}
+                id={item.id}
+                onClick={closeMenu}
+                aria-current={!home && current === item.id ? currentKind : undefined}
+              >
                 {item.label}
               </SectionLink>
             ))}

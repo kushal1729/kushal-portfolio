@@ -59,6 +59,7 @@ export function CommandPalette({ posts }: { posts: PostLink[] }) {
   const [active, setActive] = useState(0);
   const router = useRouter();
   const jump = useSectionJump();
+  const pathname = usePathname();
   const theme = useTheme();
   const listId = useId();
 
@@ -71,6 +72,20 @@ export function CommandPalette({ posts }: { posts: PostLink[] }) {
         keywords: "section jump",
         run: () => jump(item.id),
       })),
+      {
+        id: "go-home",
+        group: "Go to" as const,
+        label: "Home",
+        keywords: "portfolio start top back",
+        run: () => (pathname === "/" ? jump("top") : router.push("/")),
+      },
+      {
+        id: "go-writing-index",
+        group: "Go to" as const,
+        label: "All writing",
+        keywords: "posts articles blog index",
+        run: () => router.push("/writing"),
+      },
       ...posts.map((post) => ({
         id: `post-${post.slug}`,
         group: "Writing" as const,
@@ -84,6 +99,13 @@ export function CommandPalette({ posts }: { posts: PostLink[] }) {
         label: "Copy email address",
         keywords: "contact mail",
         run: () => void copyText(site.email, "Email address copied"),
+      },
+      {
+        id: "copy-feed",
+        group: "Actions",
+        label: "Copy RSS feed address",
+        keywords: "rss feed subscribe follow reader atom",
+        run: () => void copyText(`${site.url}/writing/rss.xml`, "Feed address copied"),
       },
       {
         id: "resume",
@@ -114,7 +136,7 @@ export function CommandPalette({ posts }: { posts: PostLink[] }) {
         run: () => toggleTheme(),
       },
     ],
-    [jump, posts, router, theme],
+    [jump, pathname, posts, router, theme],
   );
 
   const results = useMemo(() => {

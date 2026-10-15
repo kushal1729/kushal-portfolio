@@ -120,6 +120,9 @@ export default function RootLayout({
     <html
       lang="en"
       className={`${mona.variable} ${mono.variable}`}
+      /* smooth for in-page jumps, but Next switches it off for route
+         changes, so a new page always opens at its top */
+      data-scroll-behavior="smooth"
       suppressHydrationWarning
     >
       <head>

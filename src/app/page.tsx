@@ -7,11 +7,12 @@ import { cases, experience, papers, recognition } from "@/content/profile";
 import { TraceDemo } from "@/components/trace-demo";
 import { HeroName } from "@/components/hero-name";
 import { PointerEffects } from "@/components/pointer-effects";
+import { ToTop } from "@/components/to-top";
+import { FollowButton } from "@/components/follow-button";
 import { BuildGrid } from "@/components/build-grid";
 import { CopyEmail } from "@/components/copy-email";
 import { caseFigures } from "@/components/case-figures";
 import {
-  ArrowUp,
   ArrowUpRight,
   ChevronDown,
   Document,
@@ -191,7 +192,7 @@ export default function Home() {
             <ul className="post-list">
               {posts.map((post) => (
                 <li key={post.slug}>
-                  <Link className="post-link" href={`/writing/${post.slug}`}>
+                  <Link className="post-link" href={`/writing/${post.slug}`} prefetch>
                     <ViewTransition name={`post-title-${post.slug}`} share="morph" default="none">
                       <h3>{post.title}</h3>
                     </ViewTransition>
@@ -204,10 +205,10 @@ export default function Home() {
                 </li>
               ))}
             </ul>
-            <p className="feed-note">
-              All posts are at <Link href="/writing">/writing</Link>, or follow
-              the <a href="/writing/rss.xml">RSS feed</a>.
-            </p>
+            <div className="feed-note">
+              All posts are at <Link href="/writing">/writing</Link>, or{" "}
+              <FollowButton className="text-button" label="follow them in a feed reader" />.
+            </div>
           </div>
         </section>
 
@@ -249,13 +250,7 @@ export default function Home() {
         </section>
       </main>
 
-      <a className="to-top" href="#top" aria-label="Back to top">
-        <svg viewBox="0 0 44 44" aria-hidden="true">
-          <circle className="to-top-track" cx="22" cy="22" r="20" />
-          <circle className="to-top-ring" cx="22" cy="22" r="20" pathLength="100" />
-        </svg>
-        <ArrowUp />
-      </a>
+      <ToTop target="top" />
       <PointerEffects />
       <SiteFooter />
     </>

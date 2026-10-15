@@ -2,7 +2,7 @@
 
 Personal site for Kushal Yarlagadda — software engineer at HashedIn by Deloitte building AI systems that read, reason about and write software.
 
-Built with Next.js 16 (App Router, Turbopack), TypeScript, and hand-written CSS. No animation library: motion is CSS, scroll-driven animations and the View Transitions API.
+Built with Next.js 16 (App Router, Turbopack), TypeScript, and hand-written CSS. Only Tailwind's reset (preflight) is imported; no utility classes are generated, so none can collide with the site's own class names. No animation library: motion is CSS, scroll-driven animations and the View Transitions API.
 
 ## Local development
 
@@ -32,13 +32,18 @@ npm run build
 | `src/components/build-grid.tsx` | Filterable builds grid |
 | `src/components/site-header.tsx` | Header, mobile menu, command palette (⌘K / Ctrl K) and toasts |
 | `src/app/writing/` | Post index, post pages, per-post OG images, RSS feed |
+| `src/lib/outline.ts` | Gives each post's `<h2>`s ids and builds its table of contents |
+| `src/components/post-outline.tsx` | The sticky "On this page" contents beside a post |
+| `src/components/back-link.tsx` | Back links that return you to your scroll position when you came from that page |
+| `src/components/follow-button.tsx` | The Follow panel: explains RSS, one-click Feedly and Inoreader, copyable feed address |
+| `src/app/not-found.tsx` | The 404 page |
 | `src/app/opengraph-image.tsx` | Social preview card, generated at build time |
 
 ## Adding a post
 
 Append an entry to the `posts` array in `src/content/writing.tsx`. Each post needs a `slug`, `title`, `standfirst`, `date` (`YYYY-MM-DD`), `readingTime`, and a `body` of JSX.
 
-Everything else follows automatically: the route, the homepage listing, the sitemap entry, the RSS item, and a generated OG card.
+Everything else follows automatically: the route, the homepage listing, the sitemap entry, the RSS item, a generated OG card, the earlier/later links, and an "On this page" contents list built from the post's `<h2>` headings (shown when there are three or more).
 
 ## Design notes
 
