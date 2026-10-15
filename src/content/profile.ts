@@ -4,20 +4,79 @@
 
 export type Case = {
   id: string;
+  /* "now" is current client work; "built" is something taken from an empty
+     repository to working software. */
+  group: "now" | "built";
   title: string;
   context: string;
   summary: string;
   points: string[];
   stack: string[];
   /* Longer explanation, behind a disclosure so the page stays scannable. */
-  details: { heading: string; body: string }[];
+  details?: { heading: string; body: string }[];
   /* For client work: what stays with the client. */
   note?: string;
 };
 
 export const cases: Case[] = [
   {
+    id: "legacy-mining",
+    group: "now",
+    title: "Mining two legacy services",
+    context:
+      "Client engagement at HashedIn by Deloitte, ongoing. I'm the only engineer mining these two services.",
+    summary:
+      "Two services in a large enterprise estate are mine to read end to end: what each one actually does, what it calls, and where the same logic lives somewhere else. What comes out is a set of use cases the client checks against how the business really runs, before any of it is modernized.",
+    points: [
+      "A Java middleware service, followed down through DB2 and stored procedures into the mainframe transactions it ends in",
+      "An Excel ribbon tool whose rules live in VBA, with integrations of its own and logic that duplicates what runs elsewhere",
+      "Use cases and dependency maps demoed and walked through with the delivery team, then refined until the client validates them",
+    ],
+    stack: ["Java", "DB2", "Stored procedures", "Mainframe", "Excel VBA", "LLM-assisted analysis"],
+    details: [
+      {
+        heading: "Survey",
+        body: "Every entry point, outbound call and integration, found by walking the code rather than the documentation. Models read breadth no person has time for; I decide what the breadth means.",
+      },
+      {
+        heading: "Excavate",
+        body: "Behaviour recovered from the code: the service calls behind each operation, the reads and writes, the stored procedures, and the identifiers that let one request be followed across all of it. In the spreadsheet tool, that means reading what each macro decides, and which of its rules already exist somewhere else.",
+      },
+      {
+        heading: "Interpret",
+        body: "Capabilities, not classes. Use cases written specifically enough that an engineer can act on them, and plainly enough that the client can say whether they are right.",
+      },
+      {
+        heading: "Hand off",
+        body: "I demo each set of use cases to the delivery team and walk them through it. They take it to the client, and the client's questions come back to me. Once the detail holds up, the modernization team takes it from there. Every claim a model makes has to point to a file, a procedure or a query, or it goes in as a hypothesis.",
+      },
+    ],
+    note: "The client, its systems and its figures stay with the client.",
+  },
+  {
+    id: "agent-platform",
+    group: "now",
+    title: "Frontend for an agent-opportunity platform",
+    context: "Client engagement at HashedIn by Deloitte, Apr 2026 – now",
+    summary:
+      "An enterprise platform that maps a business process by process and weighs where an AI agent would pay for itself. I'm a frontend developer on its delivery team, building the Angular 21 application from the team's tickets.",
+    points: [
+      "Feature development across large modules of the application",
+      "Contributions to its modular frontend architecture",
+      "Performance optimisation across large enterprise modules",
+    ],
+    stack: ["Angular 21", "TypeScript", "RxJS"],
+    details: [
+      {
+        heading: "What the platform is for",
+        body: "There are plenty of places an agent could go and far fewer where it should. The platform helps a team map the process, mark the candidates, and keep only the ones whose running cost is justified by the work they remove. Building its screens means making that trade-off readable at a glance.",
+      },
+    ],
+    note: "The client, its product and its data stay with the client.",
+  },
+  {
     id: "product-to-code",
+    group: "built",
     title: "Product-to-code agents",
     context: "Internship project at HashedIn by Deloitte, 2026",
     summary:
@@ -35,70 +94,18 @@ export const cases: Case[] = [
       },
       {
         heading: "Built forwards, useful backwards",
-        body: "Going from requirements to code is legacy mining run in reverse. Building this direction is where most of what I know about reading the other direction came from: what a specification has to contain for code to follow from it, and what is lost when nobody writes it down.",
+        body: "Going from requirements to code is legacy mining run in reverse. Building it first taught me what a specification has to contain for code to follow from it, which is exactly what I now dig back out of systems where nobody wrote it down.",
       },
     ],
-  },
-  {
-    id: "legacy-mining",
-    title: "Mining a legacy codebase",
-    context: "Client engagement at HashedIn by Deloitte, ongoing",
-    summary:
-      "Reading a large enterprise Java application that nobody fully understands any more, and writing down what it actually does: screen by screen, down into the database and the mainframe.",
-    points: [
-      "Use cases derived from each JSF screen downward, through the service layer into DB2, stored procedures and mainframe transactions",
-      "External JAR dependencies and outside integrations mapped to the exact point each one is called from",
-      "Decommissioning impact analysis: before anything is switched off, every caller inside and outside the application is accounted for",
-    ],
-    stack: ["JSF", "Java", "DB2", "Stored procedures", "Mainframe", "LLM-assisted analysis"],
-    details: [
-      {
-        heading: "Survey",
-        body: "Every screen, entry point and outbound call, found by walking the view tree and faces config and following each screen into its managed beans. Models read breadth no person has time for; I decide what the breadth means.",
-      },
-      {
-        heading: "Excavate",
-        body: "Behaviour recovered from the code rather than the documentation: the service calls behind a button, the reads and writes, the stored procedures, and the identifiers that let one request be followed across all of it.",
-      },
-      {
-        heading: "Interpret",
-        body: "Capabilities, not classes. Written specifically enough that an engineer can act on it tomorrow, and plainly enough that the person funding the work can read it.",
-      },
-      {
-        heading: "Modernize",
-        body: "Behaviour pinned under tests first, edges strangled before the core, and nothing switched off until the evidence says it is safe. Every claim a model makes has to point to a file, a commit or a log query, or it is recorded as a hypothesis.",
-      },
-    ],
-    note: "The client, its systems and its figures stay with the client.",
-  },
-  {
-    id: "agent-assessment",
-    title: "Where an agent pays for itself",
-    context: "Client engagement at HashedIn by Deloitte, completed June 2026",
-    summary:
-      "Walking a client's business end to end, marking every point where an AI agent could take on or assist the work, then keeping only the ones that would pay for themselves.",
-    points: [
-      "The business model and its processes mapped step by step before any agent was proposed",
-      "A cost case for every candidate: what it would take to build and run, against the work it would actually remove",
-      "A shortlist that survived that test, instead of a list of everything an agent could do",
-    ],
-    stack: ["Process mapping", "Cost–benefit modelling", "Agent design"],
-    details: [
-      {
-        heading: "Could versus should",
-        body: "There are plenty of places an agent could go and far fewer where it should. Most candidates fail on running cost, on how little work they really remove, or because the step needs a person to stay accountable for it.",
-      },
-    ],
-    note: "The client, its figures and the shortlist stay with the client.",
   },
 ];
 
 /* The four stages of the mining method, drawn as a stepper next to the case. */
 export const miningStages = [
-  { name: "Survey", out: "Screen, entry-point and dependency inventory" },
-  { name: "Excavate", out: "Call paths into stored procedures and the mainframe" },
-  { name: "Interpret", out: "Capability map and use-case catalogue" },
-  { name: "Modernize", out: "Impact matrix and a defensible migration order" },
+  { name: "Survey", out: "Entry points, integrations and dependency inventory" },
+  { name: "Excavate", out: "Call paths into stored procedures, the mainframe and the macros" },
+  { name: "Interpret", out: "Use cases and a capability map" },
+  { name: "Hand off", out: "Demo, walkthrough and client validation, ahead of modernization" },
 ];
 
 export const buildFilters = [
@@ -107,7 +114,6 @@ export const buildFilters = [
   { id: "frontend", label: "Frontend" },
   { id: "data", label: "Data" },
   { id: "ml", label: "Machine learning" },
-  { id: "legacy", label: "Legacy" },
 ] as const;
 
 export type BuildFilter = (typeof buildFilters)[number]["id"];
@@ -120,6 +126,8 @@ export type Build = {
   stack: string[];
   tags: Exclude<BuildFilter, "all">[];
   href?: string;
+  /* What the link opens; papers are the default. */
+  linkLabel?: string;
 };
 
 export const builds: Build[] = [
@@ -164,20 +172,14 @@ export const builds: Build[] = [
     tags: ["data"],
   },
   {
-    id: "enterprise-frontend",
-    name: "Enterprise platform frontend",
-    when: "HashedIn, current",
-    body: "Modular frontend architecture, feature work and performance tuning across large modules of a client-facing enterprise platform.",
-    stack: ["Angular 21", "TypeScript", "RxJS"],
-    tags: ["frontend"],
-  },
-  {
-    id: "vba-extraction",
-    name: "Logic extraction from Excel and bot scripts",
-    when: "HashedIn, 2026",
-    body: "A business process that ran as an Excel ribbon tool, its rules buried in VBA and a chain of bot scripts that had outlived their author. Read out what each macro decided and which file formats were load-bearing.",
-    stack: ["VBA", "Excel", "Bot scripts"],
-    tags: ["legacy"],
+    id: "neuromorphic",
+    name: "Gradient-free neuromorphic image recognition",
+    when: "Research, 2026",
+    body: "A spiking neural network that learns with STDP under measured memristor potentiation–depression dynamics, with no backpropagation. 66.07% on CIFAR-10, and 64.84% ± 0.17 across seeds.",
+    stack: ["Python", "Spiking neural networks", "STDP", "Ridge regression"],
+    tags: ["ml"],
+    href: "https://github.com/kushal1729/Gradient-Free-Neuromorphic-Image-Recognition-Architecture-Driven-by-Measured-Memristor",
+    linkLabel: "View the code",
   },
   {
     id: "ecg",
@@ -207,6 +209,19 @@ export const builds: Build[] = [
   },
 ];
 
+/* The working stack, grouped the way the résumé groups it. */
+export const skills = [
+  { area: "Languages", tools: ["Python", "Java", "TypeScript", "SQL", "C"] },
+  { area: "Frontend", tools: ["Angular 19 and 21", "React", "NgRx", "RxJS", "HTML", "SCSS", "Vite"] },
+  { area: "Backend", tools: ["FastAPI", "Spring Boot 3", "Node.js", "Express", "REST APIs", "JWT"] },
+  { area: "AI and ML", tools: ["LangGraph", "LangChain", "Langfuse", "pgvector", "TensorFlow", "CNNs", "YOLO"] },
+  { area: "Legacy systems", tools: ["DB2", "Stored procedures", "Mainframe", "Excel VBA"] },
+  { area: "Data engineering", tools: ["Azure Databricks", "PySpark", "Delta Lake", "ADF", "SCD 1 and 2", "CDC", "Star schema"] },
+  { area: "Databases", tools: ["PostgreSQL", "SQLite"] },
+  { area: "Cloud and DevOps", tools: ["AWS", "Azure", "Oracle Cloud", "Git", "Docker"] },
+  { area: "Testing", tools: ["JUnit 5", "Mockito", "Jest", "Karma", "Jasmine"] },
+];
+
 export type Role = {
   when: string;
   title: string;
@@ -221,8 +236,8 @@ export const experience: Role[] = [
     when: "Apr 2026 – now",
     title: "Software Engineer I",
     org: "HashedIn by Deloitte",
-    place: "Hyderabad",
-    body: "Client work on a large Angular 21 enterprise platform, legacy codebase mining, and an agent opportunity assessment.",
+    place: "Bengaluru",
+    body: "Two client engagements: the Angular 21 frontend of an agent-opportunity platform, and sole ownership of the legacy mining for two services, from code to client-validated use cases.",
   },
   {
     when: "Jan – Apr 2026",
@@ -260,16 +275,43 @@ export const papers = [
   },
 ];
 
-export const recognition = [
+export type Recognition = {
+  kind: string;
+  what: string;
+  when: string;
+  /* Verification pages, one per credential. */
+  links?: { label: string; href: string }[];
+};
+
+/* Strongest first; the short introductory certificates sit at the end. */
+export const recognition: Recognition[] = [
+  {
+    kind: "Certification",
+    what: "Anthropic Claude Certified",
+    when: "4 credentials",
+    links: [
+      {
+        label: "Architect – Professional",
+        href: "https://www.credly.com/badges/2f588523-6324-42de-9817-9a772e26c02d/public_url",
+      },
+      {
+        label: "Architect – Foundations",
+        href: "https://www.credly.com/badges/0ca63f42-431a-4c36-a6f6-f5d45e580fd5/public_url",
+      },
+      {
+        label: "Developer – Foundations",
+        href: "https://www.credly.com/badges/c9aa43eb-349d-4c1f-b056-b186daad9005/public_url",
+      },
+      {
+        label: "Associate – Foundations",
+        href: "https://www.credly.com/badges/04381f92-cc62-4bfa-bcdc-0f04aefb68d6/public_url",
+      },
+    ],
+  },
   {
     kind: "Certification",
     what: "Oracle Cloud Infrastructure 2025 Certified Data Science Professional",
     when: "Valid to Oct 2027",
-  },
-  {
-    kind: "Certification",
-    what: "Anthropic Claude Architect Professional, Architect Foundation, Associate Foundation and Developer Foundations",
-    when: "4 credentials",
   },
   {
     kind: "Service",
@@ -280,5 +322,20 @@ export const recognition = [
     kind: "Award",
     what: "Third place, TANUVAS Digital Veterinary Hackathon",
     when: "2024",
+  },
+  {
+    kind: "Certificate",
+    what: "AWS Educate Machine Learning Foundations",
+    when: "Jul 2025",
+  },
+  {
+    kind: "Certificate",
+    what: "IBM Getting Started with Artificial Intelligence",
+    when: "Jul 2025",
+  },
+  {
+    kind: "Certificate",
+    what: "AWS Academy Graduate, Cloud Foundations",
+    when: "Jun 2025",
   },
 ];

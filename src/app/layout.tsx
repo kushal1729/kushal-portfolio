@@ -22,7 +22,7 @@ const mono = Martian_Mono({
   preload: false,
 });
 
-const title = "Kushal Yarlagadda — AI systems that read and write software";
+const title = "Kushal Yarlagadda — AI full-stack developer";
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
@@ -33,12 +33,14 @@ export const metadata: Metadata = {
   description: site.description,
   keywords: [
     "Kushal Yarlagadda",
+    "AI full-stack developer",
     "software engineer",
     "AI engineer",
     "multi-agent systems",
     "LangGraph",
     "agentic workflows",
     "legacy code analysis",
+    "legacy code mining",
     "legacy system modernization",
     "codebase documentation",
     "full-stack engineer",
@@ -54,7 +56,7 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title,
-    description: site.positioning,
+    description: site.now,
     url: site.url,
     siteName: site.name,
     locale: "en_US",
@@ -63,7 +65,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title,
-    description: site.positioning,
+    description: site.now,
   },
   robots: {
     index: true,
@@ -91,21 +93,22 @@ const personSchema = {
   name: site.name,
   url: site.url,
   email: `mailto:${site.email}`,
-  jobTitle: "Software Engineer",
+  jobTitle: "AI Full-Stack Developer",
   description: site.description,
   knowsAbout: [
     "Multi-agent LLM systems",
     "LangGraph",
     "LLM observability",
+    "Legacy code analysis",
     "Legacy system modernization",
-    "Static code analysis",
-    "Data lineage",
+    "Mainframe and DB2 systems",
     "Full-stack web development",
     "Angular",
     "FastAPI",
     "Spring Boot",
     "Data engineering",
     "Computer vision",
+    "Spiking neural networks",
   ],
   worksFor: { "@type": "Organization", name: site.employer },
   alumniOf: [

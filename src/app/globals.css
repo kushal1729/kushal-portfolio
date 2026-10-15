@@ -333,6 +333,39 @@ a:hover > .text-link svg {
   line-height: 1.5;
 }
 
+/* ============================== SKILLS ============================== */
+
+.skills {
+  margin: 0;
+  border-top: 1px solid var(--rule);
+}
+
+.skills > div {
+  display: grid;
+  grid-template-columns: 9rem minmax(0, 1fr);
+  gap: 1rem;
+  padding: 0.85rem 0;
+  border-bottom: 1px solid var(--rule);
+}
+
+.skills dt {
+  padding-top: 0.2rem;
+  color: var(--muted);
+  font-size: 0.8125rem;
+  font-stretch: 88%;
+}
+
+.skills dd {
+  margin: 0;
+}
+
+@media (max-width: 640px) {
+  .skills > div {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0.45rem;
+  }
+}
+
 /* ============================== HEADER ============================== */
 
 .site-header {
@@ -899,9 +932,17 @@ html:not(.theme-switching) .site-header {
   text-wrap: balance;
 }
 
+.hero-now {
+  max-width: 42ch;
+  margin-top: 1rem;
+  font-size: 1.0625rem;
+  line-height: 1.5;
+  text-wrap: pretty;
+}
+
 .hero-role {
   max-width: 40ch;
-  margin-top: 1rem;
+  margin-top: 0.75rem;
   color: var(--muted);
   text-wrap: pretty;
 }
@@ -1398,6 +1439,11 @@ html:not(.theme-switching) .site-header {
 .cases {
   display: grid;
   gap: clamp(1.25rem, 3vw, 2rem);
+}
+
+/* the one build told as a case, ahead of the grid of the rest */
+.builds-featured {
+  margin-bottom: clamp(2rem, 4vw, 3rem);
 }
 
 .case {
@@ -2080,6 +2126,32 @@ html:not(.theme-switching) .site-header {
   gap: 1rem;
   margin: 0;
   font-size: 0.9375rem;
+}
+
+.recognition-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem 1rem;
+  margin-top: 0.35rem;
+}
+
+.recognition-links a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  color: var(--accent);
+  font-size: 0.8125rem;
+  font-weight: 560;
+}
+
+.recognition-links svg {
+  width: 0.8rem;
+  height: 0.8rem;
+  transition: transform var(--t-fast) var(--ease-out);
+}
+
+.recognition-links a:hover svg {
+  transform: translate(2px, -2px);
 }
 
 .recognition-when {
@@ -2832,8 +2904,12 @@ html:not(.theme-switching) .site-header {
     animation-delay: 240ms;
   }
 
-  .hero .demo {
+  .hero-copy > :nth-child(4) {
     animation-delay: 300ms;
+  }
+
+  .hero .demo {
+    animation-delay: 360ms;
   }
 
   /* movement without a fade: the pitch is the page's main content, and it

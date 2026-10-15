@@ -78,13 +78,16 @@ function OpportunityFunnel() {
           </div>
         ))}
       </div>
-      <figcaption>Illustrative proportions, not the client&apos;s figures.</figcaption>
+      <figcaption>
+        Illustrative: what the platform helps a team narrow down. Not the
+        client&apos;s figures.
+      </figcaption>
     </figure>
   );
 }
 
-export const caseFigures: Record<string, () => React.JSX.Element> = {
+export const caseFigures: Record<string, (() => React.JSX.Element) | undefined> = {
   "product-to-code": AgentPipeline,
   "legacy-mining": MiningStepper,
-  "agent-assessment": OpportunityFunnel,
+  "agent-platform": OpportunityFunnel,
 };

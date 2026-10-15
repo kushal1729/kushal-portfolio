@@ -3,7 +3,7 @@ import { ViewTransition } from "react";
 import { site } from "@/lib/site";
 import { SiteFooter, SiteHeader } from "@/components/chrome";
 import { posts, formatDate } from "@/content/writing";
-import { cases, experience, papers, recognition } from "@/content/profile";
+import { cases, experience, papers, recognition, skills, type Case } from "@/content/profile";
 import { TraceDemo } from "@/components/trace-demo";
 import { HeroName } from "@/components/hero-name";
 import { PointerEffects } from "@/components/pointer-effects";
@@ -34,14 +34,14 @@ export default function Home() {
           <div className="hero-grid">
             <div className="hero-copy">
               <p className="pitch">{site.positioning}</p>
+              <p className="hero-now">{site.now}</p>
               <p className="hero-role">
-                {site.role} at {site.employer}, {site.location}. Two IEEE
-                papers, five certifications, and nine systems built from an
-                empty repository.
+                {site.role} at {site.employer}, {site.location}. Six systems
+                built in a four-month internship; two IEEE papers before that.
               </p>
               <div className="hero-actions">
                 <a className="btn" href="#work">
-                  See selected work
+                  See current work
                 </a>
                 <a className="btn btn-quiet" href={site.resume} target="_blank" rel="noreferrer">
                   <Document />
@@ -59,71 +59,60 @@ export default function Home() {
 
         <section className="section wrap" id="work" tabIndex={-1} aria-labelledby="work-title">
           <header className="section-head">
-            <h2 id="work-title">Selected work</h2>
+            <h2 id="work-title">Current work</h2>
             <p>
-              One system I built, and two client engagements at HashedIn by
-              Deloitte, described by method rather than by name.
+              Two client engagements at HashedIn by Deloitte, described by
+              method rather than by name.
             </p>
           </header>
 
           <div className="cases">
-            {cases.map((item) => {
-              const Figure = caseFigures[item.id];
-              return (
-                <article
-                  className="case spot"
-                  id={item.id}
-                  key={item.id}
-                  tabIndex={-1}
-                  aria-labelledby={`${item.id}-title`}
-                >
-                  <div className="case-copy">
-                    <h3 id={`${item.id}-title`}>{item.title}</h3>
-                    <p className="case-context">{item.context}</p>
-                    <p className="case-summary">{item.summary}</p>
-                    <ul className="case-points">
-                      {item.points.map((point) => (
-                        <li key={point}>{point}</li>
-                      ))}
-                    </ul>
-                    <ul className="stack" aria-label="Tools and techniques">
-                      {item.stack.map((tool) => (
-                        <li key={tool}>{tool}</li>
-                      ))}
-                    </ul>
-                    <details className="case-more">
-                      <summary>
-                        <ChevronDown />
-                        How it works
-                      </summary>
-                      <div className="case-more-body">
-                        {item.details.map((detail) => (
-                          <div key={detail.heading}>
-                            <h4>{detail.heading}</h4>
-                            <p>{detail.body}</p>
-                          </div>
-                        ))}
-                      </div>
-                    </details>
-                    {item.note && <p className="case-note">{item.note}</p>}
-                  </div>
-                  <Figure />
-                </article>
-              );
-            })}
+            {cases
+              .filter((item) => item.group === "now")
+              .map((item) => (
+                <CaseCard item={item} key={item.id} />
+              ))}
           </div>
         </section>
 
         <section className="section wrap" id="builds" tabIndex={-1} aria-labelledby="builds-title">
           <header className="section-head">
-            <h2 id="builds-title">Other things I&apos;ve built</h2>
+            <h2 id="builds-title">Things I&apos;ve built</h2>
             <p>
-              Taken from an empty repository to working software across Java,
-              Python, Node, Angular and Databricks, plus the research that
-              taught me to ask for evidence.
+              Built from an empty repository during my internship, across
+              Python, Java, Node, Angular and Databricks, and the research
+              before it.
             </p>
           </header>
+          <div className="cases builds-featured">
+            {cases
+              .filter((item) => item.group === "built")
+              .map((item) => (
+                <CaseCard item={item} key={item.id} />
+              ))}
+          </div>
           <BuildGrid />
+        </section>
+
+        <section className="section section-split wrap" id="skills" tabIndex={-1} aria-labelledby="skills-title">
+          <header className="section-head">
+            <h2 id="skills-title">Skills</h2>
+            <p>What I build with, and what I read.</p>
+          </header>
+          <dl className="skills">
+            {skills.map((group) => (
+              <div key={group.area}>
+                <dt>{group.area}</dt>
+                <dd>
+                  <ul className="stack">
+                    {group.tools.map((tool) => (
+                      <li key={tool}>{tool}</li>
+                    ))}
+                  </ul>
+                </dd>
+              </div>
+            ))}
+          </dl>
         </section>
 
         <section className="section section-split wrap" id="experience" tabIndex={-1} aria-labelledby="experience-title">
@@ -171,7 +160,19 @@ export default function Home() {
                 <div key={item.what}>
                   <dt>{item.kind}</dt>
                   <dd>
-                    <span>{item.what}</span>
+                    <span>
+                      {item.what}
+                      {item.links && (
+                        <span className="recognition-links">
+                          {item.links.map((link) => (
+                            <a key={link.href} href={link.href} target="_blank" rel="noreferrer">
+                              {link.label}
+                              <ArrowUpRight />
+                            </a>
+                          ))}
+                        </span>
+                      )}
+                    </span>
                     <span className="recognition-when">{item.when}</span>
                   </dd>
                 </div>
@@ -184,8 +185,8 @@ export default function Home() {
           <header className="section-head">
             <h2 id="writing-title">Writing</h2>
             <p>
-              Notes on reading systems nobody remembers, and where a language
-              model earns its place.
+              Notes from mining legacy code with a language model: what to
+              trust, in what order, and where the model earns its place.
             </p>
           </header>
           <div>
@@ -254,5 +255,53 @@ export default function Home() {
       <PointerEffects />
       <SiteFooter />
     </>
+  );
+}
+
+/* One case study: the copy, an optional "how it works" disclosure, and the
+   figure drawn for it. */
+function CaseCard({ item }: { item: Case }) {
+  const Figure = caseFigures[item.id];
+  return (
+    <article
+      className="case spot"
+      id={item.id}
+      tabIndex={-1}
+      aria-labelledby={`${item.id}-title`}
+    >
+      <div className="case-copy">
+        <h3 id={`${item.id}-title`}>{item.title}</h3>
+        <p className="case-context">{item.context}</p>
+        <p className="case-summary">{item.summary}</p>
+        <ul className="case-points">
+          {item.points.map((point) => (
+            <li key={point}>{point}</li>
+          ))}
+        </ul>
+        <ul className="stack" aria-label="Tools and techniques">
+          {item.stack.map((tool) => (
+            <li key={tool}>{tool}</li>
+          ))}
+        </ul>
+        {item.details && (
+          <details className="case-more">
+            <summary>
+              <ChevronDown />
+              How it works
+            </summary>
+            <div className="case-more-body">
+              {item.details.map((detail) => (
+                <div key={detail.heading}>
+                  <h4>{detail.heading}</h4>
+                  <p>{detail.body}</p>
+                </div>
+              ))}
+            </div>
+          </details>
+        )}
+        {item.note && <p className="case-note">{item.note}</p>}
+      </div>
+      {Figure && <Figure />}
+    </article>
   );
 }

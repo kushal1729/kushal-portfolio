@@ -74,7 +74,7 @@ export function BuildGrid() {
                   target="_blank"
                   rel="noreferrer"
                 >
-                  Read the paper
+                  {build.linkLabel ?? "Read the paper"}
                   <ArrowUpRight />
                 </a>
               )}
