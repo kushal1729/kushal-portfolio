@@ -59,10 +59,10 @@ export default function Home() {
 
         <section className="section wrap" id="work" tabIndex={-1} aria-labelledby="work-title">
           <header className="section-head">
-            <h2 id="work-title">Current work</h2>
+            <h2 id="work-title">Client work</h2>
             <p>
-              Two client engagements at HashedIn by Deloitte, described by
-              method rather than by name.
+              My current engagement at HashedIn by Deloitte and the one before
+              it, described by method rather than by name.
             </p>
           </header>
 

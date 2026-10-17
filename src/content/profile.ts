@@ -57,9 +57,9 @@ export const cases: Case[] = [
     id: "agent-platform",
     group: "now",
     title: "Frontend for an agent-opportunity platform",
-    context: "Client engagement at HashedIn by Deloitte, Apr 2026 – now",
+    context: "Past client engagement at HashedIn by Deloitte",
     summary:
-      "An enterprise platform that maps a business process by process and weighs where an AI agent would pay for itself. I'm a frontend developer on its delivery team, building the Angular 21 application from the team's tickets.",
+      "An enterprise platform that maps a business process by process and weighs where an AI agent would pay for itself. I was a frontend developer on its delivery team, building the Angular 21 application from the team's tickets.",
     points: [
       "Feature development across large modules of the application",
       "Contributions to its modular frontend architecture",
@@ -69,7 +69,7 @@ export const cases: Case[] = [
     details: [
       {
         heading: "What the platform is for",
-        body: "There are plenty of places an agent could go and far fewer where it should. The platform helps a team map the process, mark the candidates, and keep only the ones whose running cost is justified by the work they remove. Building its screens means making that trade-off readable at a glance.",
+        body: "There are plenty of places an agent could go and far fewer where it should. The platform helps a team map the process, mark the candidates, and keep only the ones whose running cost is justified by the work they remove. Building its screens meant making that trade-off readable at a glance.",
       },
     ],
     note: "The client, its product and its data stay with the client.",
@@ -237,7 +237,7 @@ export const experience: Role[] = [
     title: "Software Engineer I",
     org: "HashedIn by Deloitte",
     place: "Bengaluru",
-    body: "Two client engagements: the Angular 21 frontend of an agent-opportunity platform, and sole ownership of the legacy mining for two services, from code to client-validated use cases.",
+    body: "Sole owner of the legacy mining for two services, from code to client-validated use cases. Before that, frontend development on the Angular 21 application of an agent-opportunity platform.",
   },
   {
     when: "Jan – Apr 2026",

@@ -17,7 +17,7 @@ export const site = {
 } as const;
 
 export const nav = [
-  { id: "work", label: "Now" },
+  { id: "work", label: "Work" },
   { id: "builds", label: "Builds" },
   { id: "skills", label: "Skills" },
   { id: "experience", label: "Experience" },

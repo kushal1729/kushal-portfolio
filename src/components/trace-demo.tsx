@@ -26,7 +26,7 @@ const states = [
   {
     id: "frontend",
     label: "Frontend",
-    title: "The kind of screen I build: where an agent pays for itself",
+    title: "The kind of screen I built: where an agent pays for itself",
     caseId: "agent-platform",
     caption: "Each candidate weighed by what it costs to run against the work it removes.",
   },
