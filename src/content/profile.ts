@@ -84,17 +84,27 @@ export const cases: Case[] = [
     title: "Product-to-code agents",
     context: "Internship project at HashedIn by Deloitte, 2026",
     summary:
-      "A multi-agent workflow that takes a product requirement and produces epics, user stories, technical specifications and working code, with a person able to stop and correct it between every step.",
+      "A full-stack multi-agent system that turns a product requirement into epics, user stories, technical specifications and tested Python code. A person approves, rejects or redirects the agents at every stage, and every file can be traced back to the requirement it came from.",
     points: [
-      "Pause-and-resume checkpoints between stages, so a reviewer can fix a story before any code is written from it",
-      "Live progress streamed to the browser over WebSockets, with Mermaid diagrams generated alongside each spec",
-      "Every model call traced in Langfuse, so a bad output can be followed back to the prompt that produced it",
+      "A fourteen-node LangGraph pipeline with an approval gate after every stage, held in a Postgres checkpointer so a run can wait for review or survive a restart",
+      "Generated code is linted and run against its own tests; failures go to a fix agent whose patch applies automatically or after a person approves it",
+      "Specs grounded in the project's own documents through pgvector search and in web research, with file writes and knowledge search exposed as MCP servers",
+      "A Next.js workbench: live progress over WebSockets, Mermaid diagrams, gates, instructions mid-run, admin model settings and a usage ledger",
+      "303 backend, 43 frontend and 9 Playwright end-to-end tests; a live run validated its first story on the first attempt",
     ],
-    stack: ["Python", "FastAPI", "LangGraph", "pgvector", "Langfuse", "WebSockets"],
+    stack: ["Python", "FastAPI", "LangGraph", "MCP", "pgvector", "Langfuse", "Next.js", "TypeScript", "WebSockets", "Playwright"],
     details: [
       {
-        heading: "Why checkpoints matter more than the model",
-        body: "A wrong user story produces confidently wrong code. Each stage writes its output to a checkpoint and can stop there for review, so the expensive mistake is caught while it is still a sentence. Resuming picks up from the corrected state rather than starting over.",
+        heading: "Why gates matter more than the model",
+        body: "A wrong user story produces confidently wrong code. So each stage stops at a gate: approve it, reject it with feedback for the agent to try again, or send the running agent an instruction. The state lives in a Postgres checkpointer, so a run can wait for a reviewer or survive a server restart, and it resumes from the corrected state rather than starting over.",
+      },
+      {
+        heading: "Code has to pass before it counts",
+        body: "Each story's code is written into its own folder through the file-operations MCP server, then checked with ruff and run against the tests generated with it. A failure goes to a fix agent that proposes a patch, applied automatically or held for a person to approve, up to a set number of attempts. Every model call goes through one gateway with a token-rate limiter and is traced in Langfuse.",
+      },
+      {
+        heading: "What a finished run hands over",
+        body: "An export with the code, the specs as PDF, the research behind them, the validation reports and a traceability matrix from each requirement through its epic, story and spec to the files that implement it.",
       },
       {
         heading: "Built forwards, useful backwards",
@@ -216,9 +226,9 @@ export const builds: Build[] = [
 /* The working stack, grouped the way the résumé groups it. */
 export const skills = [
   { area: "Languages", tools: ["Python", "Java", "TypeScript", "SQL", "C"] },
-  { area: "Frontend", tools: ["Angular 19 and 21", "React", "NgRx", "RxJS", "HTML", "SCSS", "Vite"] },
+  { area: "Frontend", tools: ["Angular 19 and 21", "React", "Next.js", "NgRx", "RxJS", "HTML", "SCSS", "Vite"] },
   { area: "Backend", tools: ["FastAPI", "Spring Boot 3", "Node.js", "Express", "REST APIs", "JWT"] },
-  { area: "AI and ML", tools: ["LangGraph", "LangChain", "Langfuse", "pgvector", "TensorFlow", "CNNs", "YOLO"] },
+  { area: "AI and ML", tools: ["LangGraph", "LangChain", "MCP", "Langfuse", "pgvector", "TensorFlow", "CNNs", "YOLO"] },
   { area: "Legacy systems", tools: ["DB2", "Stored procedures", "Mainframe", "Excel VBA"] },
   { area: "Data engineering", tools: ["Azure Databricks", "PySpark", "Delta Lake", "ADF", "SCD 1 and 2", "CDC", "Star schema"] },
   { area: "Databases", tools: ["PostgreSQL", "SQLite"] },
@@ -248,7 +258,7 @@ export const experience: Role[] = [
     title: "Software Engineer Intern",
     org: "HashedIn by Deloitte",
     place: "Bengaluru",
-    body: "Built six systems end to end across Python, Java, Node, Angular and Databricks, including the product-to-code agents.",
+    body: "Built six systems end to end across Python, Java, Node, Angular, Next.js and Databricks, including the product-to-code agents.",
   },
   {
     when: "2022 – 2026",

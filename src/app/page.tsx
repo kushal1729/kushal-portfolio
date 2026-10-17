@@ -77,8 +77,8 @@ export default function Home() {
             <h2 id="builds-title">Things I&apos;ve built</h2>
             <p>
               Built from an empty repository during my internship, across
-              Python, Java, Node, Angular and Databricks, and the research
-              before it.
+              Python, Java, Node, Angular, Next.js and Databricks, and the
+              research before it.
             </p>
           </header>
           <div className="cases builds-featured">
