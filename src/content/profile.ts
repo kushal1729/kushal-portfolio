@@ -82,7 +82,7 @@ export const cases: Case[] = [
     id: "product-to-code",
     group: "built",
     title: "Product-to-code agents",
-    context: "Built from scratch on the problem statement of my HashedIn by Deloitte internship evaluation, 2026",
+    context: "Inspired by my internship evaluation project at HashedIn by Deloitte, 2026",
     summary:
       "A full-stack multi-agent system that turns a product requirement into epics, user stories, technical specifications and tested Python code. A person approves, rejects or redirects the agents at every stage, and every file can be traced back to the requirement it came from.",
     points: [
