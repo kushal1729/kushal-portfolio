@@ -312,6 +312,12 @@ export const recognition: Recognition[] = [
     kind: "Certification",
     what: "Oracle Cloud Infrastructure 2025 Certified Data Science Professional",
     when: "Valid to Oct 2027",
+    links: [
+      {
+        label: "Verify on Oracle",
+        href: "https://catalog-education.oracle.com/ords/certview/sharebadge?id=0311806CEE025B84C0F7C9B1322847144E8FC832364C6B9F357303F69C8C4616",
+      },
+    ],
   },
   {
     kind: "Service",
