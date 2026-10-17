@@ -60,10 +60,7 @@ export default function Home() {
         <section className="section wrap" id="work" tabIndex={-1} aria-labelledby="work-title">
           <header className="section-head">
             <h2 id="work-title">Client work</h2>
-            <p>
-              My current engagement at HashedIn by Deloitte and the one before
-              it, described by method rather than by name.
-            </p>
+            <p>My engagements at HashedIn by Deloitte.</p>
           </header>
 
           <div className="cases">
@@ -270,6 +267,11 @@ function CaseCard({ item }: { item: Case }) {
       aria-labelledby={`${item.id}-title`}
     >
       <div className="case-copy">
+        {item.status && (
+          <p className="case-status" data-status={item.status}>
+            {item.status === "current" ? "Current work" : "Finished"}
+          </p>
+        )}
         <h3 id={`${item.id}-title`}>{item.title}</h3>
         <p className="case-context">{item.context}</p>
         <p className="case-summary">{item.summary}</p>

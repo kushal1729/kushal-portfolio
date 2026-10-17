@@ -7,6 +7,8 @@ export type Case = {
   /* "now" is current client work; "built" is something taken from an empty
      repository to working software. */
   group: "now" | "built";
+  /* Client work only: whether the engagement is still running. */
+  status?: "current" | "finished";
   title: string;
   context: string;
   summary: string;
@@ -22,9 +24,10 @@ export const cases: Case[] = [
   {
     id: "legacy-mining",
     group: "now",
+    status: "current",
     title: "Mining two legacy services",
     context:
-      "Client engagement at HashedIn by Deloitte, ongoing. I'm the only engineer mining these two services.",
+      "Client engagement at HashedIn by Deloitte. I'm the only engineer mining these two services.",
     summary:
       "Two services in a large enterprise estate are mine to read end to end: what each one actually does, what it calls, and where the same logic lives somewhere else. What comes out is a set of use cases the client checks against how the business really runs, before any of it is modernized.",
     points: [
@@ -56,8 +59,9 @@ export const cases: Case[] = [
   {
     id: "agent-platform",
     group: "now",
+    status: "finished",
     title: "Frontend for an agent-opportunity platform",
-    context: "Past client engagement at HashedIn by Deloitte",
+    context: "Client engagement at HashedIn by Deloitte",
     summary:
       "An enterprise platform that maps a business process by process and weighs where an AI agent would pay for itself. I was a frontend developer on its delivery team, building the Angular 21 application from the team's tickets.",
     points: [
