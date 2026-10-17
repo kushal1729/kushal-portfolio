@@ -9,12 +9,12 @@ import { posts, formatDate } from "@/content/writing";
 export const metadata: Metadata = {
   title: "Writing",
   description:
-    "Notes on reading systems nobody remembers: which sources of truth about an old system to trust, in what order, and where a language model earns its place.",
+    "Notes from mining legacy code with a language model: which sources of truth about an old system to trust, in what order, and where the model earns its place.",
   alternates: { canonical: "/writing" },
   openGraph: {
     title: "Writing — Kushal Yarlagadda",
     description:
-      "Notes on reading systems nobody remembers, and where a language model earns its place.",
+      "Notes from mining legacy code with a language model, and where the model earns its place.",
     url: "/writing",
     type: "website",
   },
@@ -33,8 +33,9 @@ export default function WritingIndex() {
           <BackLink href="/#writing">Back to portfolio</BackLink>
           <h1>Writing</h1>
           <p>
-            Notes on reading systems nobody remembers: which sources to trust,
-            in what order, and where a language model earns its place.
+            Notes from mining legacy code with a language model: which
+            sources to trust, in what order, and where the model earns its
+            place.
           </p>
           <div className="page-actions">
             <FollowButton />

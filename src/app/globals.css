@@ -23,6 +23,12 @@
   --accent-soft: rgb(42 63 232 / 0.1);
   --accent-line: rgb(42 63 232 / 0.38);
   --scrim: rgb(10 12 24 / 0.38);
+  /* Engagement status: the only colours besides the accent, and only ever
+     a small dot and badge. Inks pass AA on their own tint. */
+  --status-current: #ea580c;
+  --status-current-ink: #a33a06;
+  --status-finished: #16a34a;
+  --status-finished-ink: #13692f;
 
   --sans: var(--font-mona), ui-sans-serif, system-ui, sans-serif;
   --mono: var(--font-mono), ui-monospace, SFMono-Regular, Menlo, monospace;
@@ -57,6 +63,10 @@
   --accent-soft: rgb(142 156 255 / 0.14);
   --accent-line: rgb(142 156 255 / 0.42);
   --scrim: rgb(2 4 12 / 0.6);
+  --status-current: #fb923c;
+  --status-current-ink: #fdba74;
+  --status-finished: #4ade80;
+  --status-finished-ink: #86efac;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -74,6 +84,10 @@
     --accent-soft: rgb(142 156 255 / 0.14);
     --accent-line: rgb(142 156 255 / 0.42);
     --scrim: rgb(2 4 12 / 0.6);
+    --status-current: #fb923c;
+    --status-current-ink: #fdba74;
+    --status-finished: #4ade80;
+    --status-finished-ink: #86efac;
   }
 }
 
@@ -331,6 +345,39 @@ a:hover > .text-link svg {
   font-size: 0.78rem;
   font-stretch: 88%;
   line-height: 1.5;
+}
+
+/* ============================== SKILLS ============================== */
+
+.skills {
+  margin: 0;
+  border-top: 1px solid var(--rule);
+}
+
+.skills > div {
+  display: grid;
+  grid-template-columns: 9rem minmax(0, 1fr);
+  gap: 1rem;
+  padding: 0.85rem 0;
+  border-bottom: 1px solid var(--rule);
+}
+
+.skills dt {
+  padding-top: 0.2rem;
+  color: var(--muted);
+  font-size: 0.8125rem;
+  font-stretch: 88%;
+}
+
+.skills dd {
+  margin: 0;
+}
+
+@media (max-width: 640px) {
+  .skills > div {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0.45rem;
+  }
 }
 
 /* ============================== HEADER ============================== */
@@ -899,9 +946,17 @@ html:not(.theme-switching) .site-header {
   text-wrap: balance;
 }
 
+.hero-now {
+  max-width: 42ch;
+  margin-top: 1rem;
+  font-size: 1.0625rem;
+  line-height: 1.5;
+  text-wrap: pretty;
+}
+
 .hero-role {
   max-width: 40ch;
-  margin-top: 1rem;
+  margin-top: 0.75rem;
   color: var(--muted);
   text-wrap: pretty;
 }
@@ -1400,6 +1455,11 @@ html:not(.theme-switching) .site-header {
   gap: clamp(1.25rem, 3vw, 2rem);
 }
 
+/* the one build told as a case, ahead of the grid of the rest */
+.builds-featured {
+  margin-bottom: clamp(2rem, 4vw, 3rem);
+}
+
 .case {
   display: grid;
   grid-template-columns: minmax(0, 6fr) minmax(0, 5fr);
@@ -1416,6 +1476,54 @@ html:not(.theme-switching) .site-header {
   font-stretch: 96%;
   line-height: 1.05;
   letter-spacing: -0.03em;
+}
+
+/* Current work or finished: a coloured dot inside a tinted pill. */
+.case-status {
+  --status: var(--status-current);
+  --status-ink: var(--status-current-ink);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  margin-bottom: 0.85rem;
+  padding: 0.25rem 0.7rem 0.25rem 0.6rem;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--status) 14%, var(--surface));
+  color: var(--status-ink);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.case-status[data-status="finished"] {
+  --status: var(--status-finished);
+  --status-ink: var(--status-finished-ink);
+}
+
+.case-status::before {
+  content: "";
+  flex: none;
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 50%;
+  background: var(--status);
+}
+
+/* the running engagement breathes; a finished one stays still */
+@media (prefers-reduced-motion: no-preference) {
+  .case-status[data-status="current"]::before {
+    animation: status-live 2.4s var(--ease-in-out) infinite;
+  }
+
+  @keyframes status-live {
+    0%,
+    100% {
+      box-shadow: 0 0 0 0 color-mix(in srgb, var(--status) 55%, transparent);
+    }
+    60% {
+      box-shadow: 0 0 0 0.35rem color-mix(in srgb, var(--status) 0%, transparent);
+    }
+  }
 }
 
 .case-context {
@@ -2080,6 +2188,32 @@ html:not(.theme-switching) .site-header {
   gap: 1rem;
   margin: 0;
   font-size: 0.9375rem;
+}
+
+.recognition-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem 1rem;
+  margin-top: 0.35rem;
+}
+
+.recognition-links a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  color: var(--accent);
+  font-size: 0.8125rem;
+  font-weight: 560;
+}
+
+.recognition-links svg {
+  width: 0.8rem;
+  height: 0.8rem;
+  transition: transform var(--t-fast) var(--ease-out);
+}
+
+.recognition-links a:hover svg {
+  transform: translate(2px, -2px);
 }
 
 .recognition-when {
@@ -2832,8 +2966,12 @@ html:not(.theme-switching) .site-header {
     animation-delay: 240ms;
   }
 
-  .hero .demo {
+  .hero-copy > :nth-child(4) {
     animation-delay: 300ms;
+  }
+
+  .hero .demo {
+    animation-delay: 360ms;
   }
 
   /* movement without a fade: the pitch is the page's main content, and it

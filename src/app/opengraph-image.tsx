@@ -1,7 +1,7 @@
 import { ImageResponse } from "next/og";
 import { site } from "@/lib/site";
 
-export const alt = `${site.name}: ${site.positioning}`;
+export const alt = `${site.name}: ${site.positioning} ${site.now}`;
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -10,7 +10,7 @@ const INK = "#14161b";
 const MUTED = "#555a66";
 const ACCENT = "#2a3fe8";
 
-const verbs = ["Read", "Reason", "Write"];
+const verbs = ["Legacy mining", "Full stack", "AI agents"];
 
 export default function OpenGraphImage() {
   return new ImageResponse(
@@ -41,12 +41,15 @@ export default function OpenGraphImage() {
           <div style={{ display: "flex", fontSize: 112, fontWeight: 700, letterSpacing: -5, lineHeight: 0.9 }}>
             Yarlagadda
           </div>
-          <div style={{ display: "flex", marginTop: 28, fontSize: 36, lineHeight: 1.2, maxWidth: 820, letterSpacing: -1 }}>
+          <div style={{ display: "flex", marginTop: 28, fontSize: 44, fontWeight: 600, lineHeight: 1.1, letterSpacing: -1.5 }}>
             {site.positioning}
+          </div>
+          <div style={{ display: "flex", marginTop: 14, fontSize: 26, lineHeight: 1.3, maxWidth: 940, color: MUTED }}>
+            {site.now}
           </div>
         </div>
 
-        {/* the hero's three states, drawn as a trace */}
+        {/* the three strands of the work, drawn as a trace */}
         <div style={{ display: "flex", alignItems: "center" }}>
           {verbs.map((verb, i) => (
             <div key={verb} style={{ display: "flex", alignItems: "center" }}>
@@ -57,7 +60,7 @@ export default function OpenGraphImage() {
                   height: 18,
                   borderRadius: 9,
                   border: `3px solid ${ACCENT}`,
-                  background: i === verbs.length - 1 ? ACCENT : BG,
+                  background: i === 0 ? ACCENT : BG,
                 }}
               />
               <span style={{ display: "flex", marginLeft: 14, fontSize: 26, color: INK }}>{verb}</span>

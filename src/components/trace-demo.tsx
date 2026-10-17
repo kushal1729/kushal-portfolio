@@ -12,26 +12,27 @@ import {
 import { useSectionJump } from "./command-palette";
 import { Pause, Play } from "./icons";
 
-/* One state per verb in the pitch. Each is an illustrative miniature of the
-   real work further down the page, and links to it. */
+/* One state per strand of the work, current work first. Each is an
+   illustrative miniature of the real work further down the page, and links
+   to it. The examples are deliberately generic: nothing is the client's. */
 const states = [
   {
-    id: "read",
-    label: "Read",
+    id: "mining",
+    label: "Mining",
     title: "Reading a legacy method the way I mine a codebase",
     caseId: "legacy-mining",
     caption: "Every finding points back to the line it came from.",
   },
   {
-    id: "reason",
-    label: "Reason",
-    title: "Deciding where an agent is worth building",
-    caseId: "agent-assessment",
-    caption: "Most places an agent could go fail on cost, or need a person to stay accountable.",
+    id: "frontend",
+    label: "Frontend",
+    title: "The kind of screen I built: where an agent pays for itself",
+    caseId: "agent-platform",
+    caption: "Each candidate weighed by what it costs to run against the work it removes.",
   },
   {
-    id: "write",
-    label: "Write",
+    id: "agents",
+    label: "Agents",
     title: "Turning a requirement into reviewed code",
     caseId: "product-to-code",
     caption: "Agents draft each stage; a person approves before the next one starts.",
@@ -40,31 +41,31 @@ const states = [
 
 const code = [
   "public String submit() {",
-  "  Invoice inv = dao.find(id);",
-  '  if (inv.isLocked()) return "locked";',
-  "  var tax = rates.lookup(inv.region());",
-  '  db.call("BILLING.APPLY_TAX", inv, tax);',
-  "  ledger.post(inv); // SOAP",
-  '  audit.write("INV_SUBMIT", id);',
+  "  Booking b = dao.find(id);",
+  '  if (b.isLocked()) return "locked";',
+  "  var slot = cal.lookup(b.expert());",
+  '  db.call("SCHED.RESERVE", b, slot);',
+  "  notify.send(b); // SOAP",
+  '  audit.write("BKG_SUBMIT", id);',
   '  return "done";',
   "}",
 ];
 
 const findings = [
-  { line: 1, text: "Entry point: the invoice Submit action" },
-  { line: 2, text: "Reads the invoice table" },
-  { line: 3, text: "Rule: a locked invoice can't be submitted" },
-  { line: 4, text: "Depends on a tax-rate service" },
-  { line: 5, text: "Calls procedure BILLING.APPLY_TAX" },
-  { line: 6, text: "Posts to the ledger over SOAP" },
+  { line: 1, text: "Entry point: the booking Submit action" },
+  { line: 2, text: "Reads the booking table" },
+  { line: 3, text: "Rule: a locked booking can't be submitted" },
+  { line: 4, text: "Depends on an expert-calendar service" },
+  { line: 5, text: "Calls procedure SCHED.RESERVE" },
+  { line: 6, text: "Sends a notification over SOAP" },
 ];
 
 const candidates = [
-  { task: "Triage incoming vendor files", cost: 2, removes: 5, verdict: "Build" },
-  { task: "Draft replies to routine tickets", cost: 2, removes: 4, verdict: "Build" },
-  { task: "Summarise the weekly report", cost: 2, removes: 1, verdict: "Drop: saves too little" },
-  { task: "Approve supplier payments", cost: 3, removes: 4, verdict: "Drop: needs a person accountable" },
-  { task: "Reconcile ledger mismatches", cost: 3, removes: 5, verdict: "Build" },
+  { task: "Triage incoming support tickets", cost: 2, removes: 5, verdict: "Build" },
+  { task: "Draft replies to routine requests", cost: 2, removes: 4, verdict: "Build" },
+  { task: "Summarise the weekly status report", cost: 2, removes: 1, verdict: "Drop: saves too little" },
+  { task: "Approve customer refunds", cost: 3, removes: 4, verdict: "Drop: needs a person accountable" },
+  { task: "Route requests to the right team", cost: 3, removes: 5, verdict: "Build" },
 ];
 
 const chain = [
@@ -198,7 +199,7 @@ function WritePanel() {
   );
 }
 
-const panels = { read: ReadPanel, reason: ReasonPanel, write: WritePanel };
+const panels = { mining: ReadPanel, frontend: ReasonPanel, agents: WritePanel };
 
 export function TraceDemo() {
   const [index, setIndex] = useState(0);
@@ -264,7 +265,7 @@ export function TraceDemo() {
       }}
     >
       <div className="demo-bar">
-        <div className="demo-tabs" role="tablist" aria-label="Read, reason, write">
+        <div className="demo-tabs" role="tablist" aria-label="Mining, frontend, agents">
           {states.map((state, i) => (
             <button
               key={state.id}

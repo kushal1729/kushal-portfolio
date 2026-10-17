@@ -1,7 +1,7 @@
 import type { CSSProperties } from "react";
 import { miningStages } from "@/content/profile";
 
-const pipeline = ["Requirement", "Epics", "User stories", "Specifications", "Working code"];
+const pipeline = ["Requirement and research", "Epics", "User stories", "Specifications", "Code, tested and fixed"];
 
 /* Stages down the middle, checkpoints between them, and the two concerns
    that span every stage drawn as rails alongside. */
@@ -15,19 +15,20 @@ function AgentPipeline() {
               <span className="pipeline-node" aria-hidden="true" />
               <span className="pipeline-stage">{stage}</span>
               {i < pipeline.length - 1 && (
-                <span className="pipeline-gate">Checkpoint: pause, review, resume</span>
+                <span className="pipeline-gate">Gate: approve, reject or redirect</span>
               )}
             </li>
           ))}
         </ol>
         <div className="pipeline-rails" aria-hidden="true">
           <span>Every model call traced in Langfuse</span>
-          <span>Progress streamed live over WebSockets</span>
+          <span>Live progress over WebSockets</span>
         </div>
       </div>
       <figcaption>
-        Each stage is a LangGraph node that writes a checkpoint, so a reviewer
-        can stop the run, correct it and resume from the corrected state.
+        Each stage is a LangGraph node that stops at a gate. The state lives
+        in Postgres, so a reviewer can stop the run, correct it and resume
+        from the corrected state.
       </figcaption>
     </figure>
   );
@@ -78,13 +79,16 @@ function OpportunityFunnel() {
           </div>
         ))}
       </div>
-      <figcaption>Illustrative proportions, not the client&apos;s figures.</figcaption>
+      <figcaption>
+        Illustrative: what the platform helps a team narrow down. Not the
+        client&apos;s figures.
+      </figcaption>
     </figure>
   );
 }
 
-export const caseFigures: Record<string, () => React.JSX.Element> = {
+export const caseFigures: Record<string, (() => React.JSX.Element) | undefined> = {
   "product-to-code": AgentPipeline,
   "legacy-mining": MiningStepper,
-  "agent-assessment": OpportunityFunnel,
+  "agent-platform": OpportunityFunnel,
 };
