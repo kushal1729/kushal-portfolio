@@ -90,7 +90,7 @@ export const cases: Case[] = [
       "Generated code is linted and run against its own tests; failures go to a fix agent whose patch applies automatically or after a person approves it",
       "Specs grounded in the project's own documents through pgvector search and in web research, with file writes and knowledge search exposed as MCP servers",
       "A Next.js workbench: live progress over WebSockets, Mermaid diagrams, gates, instructions mid-run, admin model settings and a usage ledger",
-      "303 backend, 43 frontend and 9 Playwright end-to-end tests; a live run validated its first story on the first attempt",
+      "Tested at every layer, from unit and API tests to end-to-end runs in a real browser, then checked against a live model before it was called done",
     ],
     stack: ["Python", "FastAPI", "LangGraph", "MCP", "pgvector", "Langfuse", "Next.js", "TypeScript", "WebSockets", "Playwright"],
     details: [
