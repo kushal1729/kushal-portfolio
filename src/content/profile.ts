@@ -266,7 +266,7 @@ export const experience: Role[] = [
     when: "2024 – present",
     title: "BS in Data Science and Applications",
     org: "IIT Madras",
-    body: "Online degree, alongside the B.Tech. Foundation level completed December 2024 and the Diploma in Programming September 2026; now in the Diploma in Data Science. CGPA 9.23.",
+    body: "Online degree, alongside the B.Tech. Foundation level completed December 2024 and the Diploma in Programming September 2026; now in the Diploma in Data Science. CGPA 9.17.",
     links: [
       {
         label: "Admission letter",
