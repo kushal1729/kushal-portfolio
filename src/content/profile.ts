@@ -242,6 +242,8 @@ export type Role = {
   org: string;
   place?: string;
   body: string;
+  /* Official documents, opened on the issuer's own verification pages. */
+  links?: { label: string; href: string }[];
 };
 
 /* A true sequence, newest first. */
@@ -261,16 +263,30 @@ export const experience: Role[] = [
     body: "Built six systems end to end across Python, Java, Node, Angular, Next.js and Databricks, including the product-to-code agents.",
   },
   {
+    when: "2024 – present",
+    title: "BS in Data Science and Applications",
+    org: "IIT Madras",
+    body: "Online degree, alongside the B.Tech. Foundation level completed December 2024 and the Diploma in Programming September 2026; now in the Diploma in Data Science. CGPA 9.23.",
+    links: [
+      {
+        label: "Admission letter",
+        href: "https://app.onlinedegree.iitm.ac.in/document_verification/bf90f9ec6fd688377e8497e61d545dde",
+      },
+      {
+        label: "Foundation certificate",
+        href: "https://ds.study.iitm.ac.in/document_verification/2a6364b7eaf25c672a57f9daf837e566c2f5d8b5a6be09ea88f3fa2c581b40f1",
+      },
+      {
+        label: "Diploma in Programming",
+        href: "https://ds.study.iitm.ac.in/document_verification/75e044cc0ee08b4fb40a589ae4bc5b10d4b3c25f3d96e051837c3cd83bb83cbf",
+      },
+    ],
+  },
+  {
     when: "2022 – 2026",
     title: "B.Tech, Computer and Communication Engineering",
     org: "Amrita Vishwa Vidyapeetham",
     body: "CGPA 8.43, with a minor in Data Science at 9.1. Field research on rural infrastructure and livelihoods in Assam through Live-in-Labs.",
-  },
-  {
-    when: "2022 – 2026",
-    title: "B.Sc, Data Science",
-    org: "IIT Madras",
-    body: "Online degree, CGPA 9.23.",
   },
 ];
 
