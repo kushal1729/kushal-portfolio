@@ -2190,14 +2190,16 @@ html:not(.theme-switching) .site-header {
   font-size: 0.9375rem;
 }
 
-.recognition-links {
+.recognition-links,
+.timeline-links {
   display: flex;
   flex-wrap: wrap;
   gap: 0.3rem 1rem;
   margin-top: 0.35rem;
 }
 
-.recognition-links a {
+.recognition-links a,
+.timeline-links a {
   display: inline-flex;
   align-items: center;
   gap: 0.25rem;
@@ -2206,13 +2208,15 @@ html:not(.theme-switching) .site-header {
   font-weight: 560;
 }
 
-.recognition-links svg {
+.recognition-links svg,
+.timeline-links svg {
   width: 0.8rem;
   height: 0.8rem;
   transition: transform var(--t-fast) var(--ease-out);
 }
 
-.recognition-links a:hover svg {
+.recognition-links a:hover svg,
+.timeline-links a:hover svg {
   transform: translate(2px, -2px);
 }
 

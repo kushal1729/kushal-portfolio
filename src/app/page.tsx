@@ -127,6 +127,16 @@ export default function Home() {
                     {role.place && `, ${role.place}`}
                   </p>
                   <p>{role.body}</p>
+                  {role.links && (
+                    <p className="timeline-links">
+                      {role.links.map((link) => (
+                        <a key={link.href} href={link.href} target="_blank" rel="noreferrer">
+                          {link.label}
+                          <ArrowUpRight />
+                        </a>
+                      ))}
+                    </p>
+                  )}
                 </div>
               </li>
             ))}
